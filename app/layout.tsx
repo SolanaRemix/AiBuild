@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 
@@ -13,8 +13,18 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "AiBuild",
-  description: "AI-powered build platform",
+  title: {
+    default: "AiBuild - AI-Powered Code Builder",
+    template: "%s | AiBuild",
+  },
+  description:
+    "Multi-model AI code builder. Prompt to project to deploy. Web, mobile, and desktop targets powered by CyberAi.",
+}
+
+export const viewport: Viewport = {
+  themeColor: "#050509",
+  width: "device-width",
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -23,8 +33,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+    <html lang="en" className="dark">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+      >
         {children}
       </body>
     </html>

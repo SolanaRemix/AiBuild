@@ -1,10 +1,20 @@
+import { GlowShell } from "@/components/aura"
+import { AppHeader } from "@/components/layout/app-header"
+import { HeroSection } from "@/components/landing/hero-section"
+import { FeaturesSection } from "@/components/landing/features-section"
+import { ModelsSection } from "@/components/landing/models-section"
+import { Footer } from "@/components/landing/footer"
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-background text-foreground">
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">AiBuild</h1>
-        <p className="text-muted-foreground text-lg">AI-powered build platform</p>
-      </div>
-    </main>
+    <GlowShell>
+      <AppHeader />
+      <main>
+        <HeroSection />
+        <FeaturesSection />
+        <ModelsSection />
+      </main>
+      <Footer />
+    </GlowShell>
   )
 }
