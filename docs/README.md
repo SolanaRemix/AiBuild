@@ -21,6 +21,7 @@ Welcome to the comprehensive documentation for **AiBuild / CyberAi** — a multi
 ### 2. Features
 
 #### Core Features
+- [Auto Config & Maintenance](./features/auto-config.md) - Automatic configuration, dependency management, and maintenance
 - [Auto Sync](./features/auto-sync.md) - Automatic synchronization with GitHub, Vercel, and v0.app
 - [Auto Test](./features/auto-test.md) - Automated testing and validation
 - [Auto Analysis](./features/auto-analysis.md) - Intelligent code analysis and logic flow detection
@@ -72,10 +73,12 @@ CyberAi intelligently routes tasks to the best AI model for each job:
 - **Governed** - Role-based access control and policies
 
 ### Automated Workflows
+- **Auto Config** - Automatic project setup and configuration
 - **Auto Sync** - Seamless GitHub integration and deployment
 - **Auto Test** - Continuous validation of generated code
 - **Auto Analysis** - Proactive issue detection
 - **Auto Fix** - Intelligent resolution of known issues
+- **Auto Maintenance** - Keep projects healthy automatically
 
 ## 🏗️ System Architecture
 

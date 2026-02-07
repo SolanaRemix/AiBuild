@@ -24,6 +24,25 @@ CyberAi orchestrates multiple AI models to provide the best results for each tas
 
 ## 🔄 Automated Features
 
+### [Auto Config & Maintenance](./auto-config.md)
+
+Comprehensive automatic configuration and maintenance:
+
+- **Auto Config** - Automatic project configuration and optimal setup
+- **Auto Reset** - Reset JSON files and configurations
+- **Auto Refresh** - Clean and refresh dependencies automatically
+- **Auto Repair** - Detect and repair broken configurations
+- **Auto Resolve Conflicts** - Intelligent conflict resolution
+- **Free Auto Sync** - Zero-cost synchronization for free tier
+- **Auto Deploy to Vercel** - Seamless deployment automation
+- **Auto Env Config** - Environment variable management
+
+**Use Cases:**
+- Keep projects healthy and up-to-date
+- Automatically fix common issues
+- Resolve conflicts intelligently
+- Manage configurations effortlessly
+
 ### [Auto Sync](./auto-sync.md)
 
 Seamlessly synchronize and deploy your projects:
