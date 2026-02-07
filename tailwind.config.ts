@@ -56,10 +56,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
         },
-        "fx-cyan": "hsl(var(--fx-glow-cyan))",
+        "fx-blue": "hsl(var(--fx-glow-blue))",
+        "fx-green": "hsl(var(--fx-glow-green))",
         "fx-purple": "hsl(var(--fx-glow-purple))",
         "fx-surface": "hsl(var(--fx-surface))",
         "fx-surface-elevated": "hsl(var(--fx-surface-elevated))",
+        "fx-rail": "hsl(var(--fx-rail))",
       },
       borderRadius: {
         lg: "var(--radius)",
