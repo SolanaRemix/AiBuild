@@ -65,13 +65,13 @@ export function SettingsView() {
               <h2 className="text-lg font-semibold text-foreground mb-6">
                 Profile Information
               </h2>
-              <form className="flex flex-col gap-5">
+              <form className="flex flex-col gap-5" onSubmit={(e) => { e.preventDefault(); /* Handle profile save */ }}>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
                     <span className="text-2xl font-bold text-primary">U</span>
                   </div>
                   <div>
-                    <GlowButton size="sm" variant="outline">
+                    <GlowButton type="button" size="sm" variant="outline">
                       Change Avatar
                     </GlowButton>
                     <p className="text-xs text-muted-foreground mt-1">
@@ -86,7 +86,7 @@ export function SettingsView() {
                 <GlowInput id="email" label="Email" type="email" defaultValue="user@example.com" />
                 <GlowInput id="username" label="Username" defaultValue="user_1" />
                 <div className="flex items-center gap-3 pt-2">
-                  <GlowButton>
+                  <GlowButton type="submit">
                     <Save className="mr-2 h-4 w-4" />
                     Save Changes
                   </GlowButton>
@@ -101,7 +101,7 @@ export function SettingsView() {
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Change Password
                 </h2>
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); /* Handle password update */ }}>
                   <GlowInput
                     id="current-password"
                     label="Current Password"
@@ -120,7 +120,7 @@ export function SettingsView() {
                     type="password"
                     placeholder="Confirm new password"
                   />
-                  <GlowButton className="self-start">Update Password</GlowButton>
+                  <GlowButton type="submit" className="self-start">Update Password</GlowButton>
                 </form>
               </GlowCard>
 
