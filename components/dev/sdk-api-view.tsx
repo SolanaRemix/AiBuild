@@ -28,7 +28,7 @@ const mockKeys: ApiKey[] = [
   {
     id: "key_1",
     name: "Production Key",
-    key: "sk_live_abc123...x9f8",
+    key: "sk_example_abc123def456ghi789jkl012mno345",
     scopes: ["projects:read", "projects:write", "deployments:write"],
     lastUsed: "2026-02-05T12:00:00Z",
     createdAt: "2026-01-15T10:00:00Z",
@@ -36,7 +36,7 @@ const mockKeys: ApiKey[] = [
   {
     id: "key_2",
     name: "CI/CD Key",
-    key: "sk_live_def456...k2m7",
+    key: "sk_example_pqr678stu901vwx234yza567bcd890",
     scopes: ["deployments:write", "logs:read"],
     lastUsed: "2026-02-04T08:30:00Z",
     createdAt: "2026-02-01T09:00:00Z",
@@ -50,7 +50,7 @@ const codeExamples = {
 const response = await fetch('https://api.aibuild.app/v1/projects', {
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer sk_live_...',
+    'Authorization': 'Bearer sk_example_your_api_key_here',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -67,7 +67,7 @@ const response = await fetch(
   {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer sk_live_...',
+      'Authorization': 'Bearer sk_example_your_api_key_here',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ target: 'web' }),
@@ -80,7 +80,7 @@ const response = await fetch(
   'https://api.aibuild.app/v1/logs?project=proj_123&type=build',
   {
     headers: {
-      'Authorization': 'Bearer sk_live_...',
+      'Authorization': 'Bearer sk_example_your_api_key_here',
     },
   }
 );
@@ -88,7 +88,7 @@ const response = await fetch(
 const { logs } = await response.json();`,
   curlExample: `# Create a project via cURL
 curl -X POST https://api.aibuild.app/v1/projects \\
-  -H "Authorization: Bearer sk_live_..." \\
+  -H "Authorization: Bearer sk_example_your_api_key_here" \\
   -H "Content-Type: application/json" \\
   -d '{
     "prompt": "Build a task management app",
