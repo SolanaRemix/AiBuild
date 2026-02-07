@@ -4,12 +4,10 @@ import { useState } from "react"
 import { GlowCard, GlowBadge, GlowButton, GlowInput } from "@/components/aura"
 import { AdminOverview } from "./admin-overview"
 import {
-  Users,
   Search,
   Eye,
   Shield,
   MoreHorizontal,
-  ChevronRight,
   X,
 } from "lucide-react"
 
