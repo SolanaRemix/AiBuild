@@ -1531,5 +1531,4 @@ GET /projects?status=ready&template=dashboard&sort=updated&order=desc
 
 ---
 
-**Last Updated:** January 2024  
 **API Version:** v1
