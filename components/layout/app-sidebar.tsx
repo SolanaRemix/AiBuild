@@ -17,7 +17,7 @@ import {
   Users,
   Brain,
   Layers,
-  CreditCard as CreditCardAlt,
+  Receipt,
   Server,
   ChevronRight,
   Zap,
@@ -63,7 +63,7 @@ const adminSection: NavSection = {
     { label: "Users", href: "/admin", icon: Users },
     { label: "Models", href: "/admin/models", icon: Brain },
     { label: "Agents", href: "/admin/agents", icon: Layers },
-    { label: "Plans & Billing", href: "/admin/plans", icon: CreditCardAlt },
+    { label: "Plans & Billing", href: "/admin/plans", icon: Receipt },
     { label: "System", href: "/admin/system", icon: Server },
   ],
 }
