@@ -139,7 +139,7 @@ AiBuild features the **Aura FX Neo-Glow** design system:
 Ready to build your first AI-powered application?
 
 1. **[Install and Setup](./getting-started.md)** - Get AiBuild running locally
-2. **[Create Your First Project](./guides/user-guide.md#creating-a-project)** - Generate code from a prompt
+2. **[Create Your First Project](./guides/user-guide.md#creating-projects)** - Generate code from a prompt
 3. **[Deploy Your App](./guides/deployment.md)** - Ship to production
 
 ## 💡 Learn More

@@ -211,8 +211,8 @@ export async function getUserProfile(userId: any): Promise<any> {
 - **Use Prettier** for formatting (automatic on save)
 - **Use ESLint** for linting
 - **2 spaces** for indentation
-- **Single quotes** for strings
-- **Semicolons** at end of statements
+- **Double quotes** for strings
+- **No semicolons** (ASI - Automatic Semicolon Insertion)
 - **Trailing commas** in multi-line objects/arrays
 
 ### Naming Conventions

@@ -138,7 +138,7 @@ Run tests with comprehensive reporting.
 ```typescript
 async function runTests(projectId: string, options?: TestOptions) {
   // 1. Get test files
-  const testFiles = await fileService.getTestFiles(projectId)
+  let testFiles = await fileService.getTestFiles(projectId)
   
   if (testFiles.length === 0) {
     // Generate tests if none exist
