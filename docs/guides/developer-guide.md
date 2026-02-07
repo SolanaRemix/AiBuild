@@ -1367,7 +1367,7 @@ export const GET = requireRole('admin')(async (req) => {
 
 ```typescript
 // ❌ Bad: Hardcoded secret
-const apiKey = 'sk_live_1234567890'
+const apiKey = 'sk_example_1234567890'
 
 // ✅ Good: Environment variable
 const apiKey = process.env.OPENAI_API_KEY
