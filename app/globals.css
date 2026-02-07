@@ -4,36 +4,38 @@
 
 @layer base {
   :root {
-    --background: 230 15% 2%;
+    --background: 222 80% 4%;
     --foreground: 210 20% 95%;
     --card: 222 47% 6%;
     --card-foreground: 210 20% 95%;
     --popover: 222 47% 6%;
     --popover-foreground: 210 20% 95%;
-    --primary: 187 92% 53%;
-    --primary-foreground: 230 15% 2%;
-    --secondary: 263 70% 65%;
+    --primary: 199 89% 60%;
+    --primary-foreground: 222 80% 4%;
+    --secondary: 271 81% 65%;
     --secondary-foreground: 210 20% 95%;
     --muted: 217 33% 12%;
     --muted-foreground: 215 20% 55%;
-    --accent: 187 92% 53%;
-    --accent-foreground: 230 15% 2%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 222 80% 4%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 95%;
     --border: 215 28% 17%;
     --input: 215 28% 17%;
-    --ring: 187 92% 53%;
+    --ring: 199 89% 60%;
     --radius: 0.75rem;
-    --success: 142 76% 46%;
-    --success-foreground: 230 15% 2%;
+    --success: 142 71% 45%;
+    --success-foreground: 222 80% 4%;
     --warning: 38 92% 50%;
-    --warning-foreground: 230 15% 2%;
+    --warning-foreground: 222 80% 4%;
 
     /* Aura FX tokens */
-    --fx-glow-cyan: 187 92% 53%;
-    --fx-glow-purple: 263 70% 65%;
+    --fx-glow-blue: 199 89% 60%;
+    --fx-glow-green: 142 71% 45%;
+    --fx-glow-purple: 271 81% 65%;
     --fx-surface: 222 47% 6%;
     --fx-surface-elevated: 222 40% 9%;
+    --fx-rail: 222 47% 5%;
   }
 }
 
@@ -47,33 +49,63 @@
 }
 
 @layer utilities {
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15),
-                0 0 60px rgba(34, 211, 238, 0.05);
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15),
+                0 0 60px rgba(56, 189, 248, 0.05);
+  }
+  .glow-green {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15),
+                0 0 60px rgba(34, 197, 94, 0.05);
   }
   .glow-purple {
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.15),
                 0 0 60px rgba(168, 85, 247, 0.05);
   }
-  .glow-cyan-strong {
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.25),
-                0 0 80px rgba(34, 211, 238, 0.1);
+  .glow-blue-strong {
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.45),
+                0 0 80px rgba(56, 189, 248, 0.15);
+  }
+  .glow-green-strong {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.45),
+                0 0 80px rgba(34, 197, 94, 0.15);
   }
   .glow-purple-strong {
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25),
-                0 0 80px rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.45),
+                0 0 80px rgba(168, 85, 247, 0.15);
+  }
+  /* Legacy cyan aliases for backward compat */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15),
+                0 0 60px rgba(56, 189, 248, 0.05);
+  }
+  .glow-cyan-strong {
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.45),
+                0 0 80px rgba(56, 189, 248, 0.15);
   }
   .border-glow-cyan {
-    border-color: rgba(34, 211, 238, 0.25);
+    border-color: rgba(56, 189, 248, 0.25);
+  }
+  .border-glow-blue {
+    border-color: rgba(56, 189, 248, 0.25);
+  }
+  .border-glow-green {
+    border-color: rgba(34, 197, 94, 0.25);
   }
   .border-glow-purple {
     border-color: rgba(168, 85, 247, 0.25);
   }
-  .text-glow-cyan {
-    text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+  .text-glow-blue {
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  }
+  .text-glow-green {
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
   }
   .text-glow-purple {
     text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+  /* Legacy alias */
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
   }
   .glass {
     backdrop-filter: blur(12px);
