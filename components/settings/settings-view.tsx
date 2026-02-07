@@ -25,6 +25,16 @@ const tabs = [
 export function SettingsView() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile")
 
+  const handleProfileSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: Implement profile save logic
+  }
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: Implement password update logic
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <div>
@@ -65,7 +75,7 @@ export function SettingsView() {
               <h2 className="text-lg font-semibold text-foreground mb-6">
                 Profile Information
               </h2>
-              <form className="flex flex-col gap-5" onSubmit={(e) => { e.preventDefault(); /* Handle profile save */ }}>
+              <form className="flex flex-col gap-5" onSubmit={handleProfileSubmit}>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
                     <span className="text-2xl font-bold text-primary">U</span>
@@ -101,7 +111,7 @@ export function SettingsView() {
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Change Password
                 </h2>
-                <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); /* Handle password update */ }}>
+                <form className="flex flex-col gap-4" onSubmit={handlePasswordSubmit}>
                   <GlowInput
                     id="current-password"
                     label="Current Password"
