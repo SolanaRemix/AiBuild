@@ -285,7 +285,7 @@ function renderHTML(userInput) {
 **Hardcoded Secrets:**
 ```typescript
 // Detected issue
-const API_KEY = "sk_live_abc123..."  // ❌ Hardcoded secret
+const API_KEY = "sk_example_abc123..."  // ❌ Hardcoded secret
 
 // Recommendation
 const API_KEY = process.env.API_KEY  // ✅ Environment variable
