@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { GlowCard, GlowBadge, GlowButton } from "@/components/aura"
 import {
-  Users2,
   Link as LinkIcon,
   Copy,
   TrendingUp,
