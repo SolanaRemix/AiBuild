@@ -299,8 +299,8 @@ Always use the `sk_example_` prefix for mock API keys:
 // Good
 const apiKey = "sk_example_abc123def456"
 
-// Bad - May trigger secret scanners
-const apiKey = "sk_live_abc123def456"
+// Bad - Hard-coded key committed to source
+const apiKey = "sk_example_live_abc123def456"
 ```
 
 ### Comments
