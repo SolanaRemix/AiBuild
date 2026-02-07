@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { GlowCard, GlowBadge, GlowButton, GlowInput } from "@/components/aura"
+import { GlowCard, GlowBadge, GlowButton } from "@/components/aura"
 import {
   Users2,
   Link as LinkIcon,
