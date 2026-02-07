@@ -21,6 +21,7 @@ Welcome to the comprehensive documentation for **AiBuild / CyberAi** — a multi
 ### 2. Features
 
 #### Core Features
+- [Auto Implementation Flows](./features/auto-implementation-flows.md) - Structured workflows that strictly follow architecture.md
 - [Auto Config & Maintenance](./features/auto-config.md) - Automatic configuration, dependency management, and maintenance
 - [Auto Sync](./features/auto-sync.md) - Automatic synchronization with GitHub, Vercel, and v0.app
 - [Auto Test](./features/auto-test.md) - Automated testing and validation

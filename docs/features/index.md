@@ -24,6 +24,25 @@ CyberAi orchestrates multiple AI models to provide the best results for each tas
 
 ## 🔄 Automated Features
 
+### [Auto Implementation Flows](./auto-implementation-flows.md)
+
+Structured workflows that strictly follow architecture.md for implementations and repairs:
+
+- **Architecture-Driven Repairs** - All changes follow layered architecture
+- **Code Layer Repair** - Fix services, CyberAi, and integration code
+- **File System Repair** - Maintain proper project structure
+- **Database Repair** - Schema fixes and migrations
+- **UI/UX Repair** - Component fixes following Aura FX design system
+- **API Repair** - Thin routes and proper service layer usage
+- **SDK Repair** - Keep SDK synced with API and types
+- **Auto Documentation Sync** - Keep docs aligned with implementation
+
+**Use Cases:**
+- Ensure all changes follow architecture principles
+- Automatically repair violations of layer boundaries
+- Keep code structure consistent
+- Sync documentation with implementation
+
 ### [Auto Config & Maintenance](./auto-config.md)
 
 Comprehensive automatic configuration and maintenance:
