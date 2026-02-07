@@ -1055,7 +1055,7 @@ NEXTAUTH_SECRET="${NEXTAUTH_SECRET}"
 const apiKey = process.env.OPENAI_API_KEY
 
 // ❌ Bad
-const apiKey = "sk_live_hardcoded"
+const apiKey = "sk_example_hardcoded"
 ```
 
 **Validate configuration:**
