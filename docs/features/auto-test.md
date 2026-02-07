@@ -675,8 +675,8 @@ GET /api/projects/:id/tests/coverage
 
 - [Auto Analysis Documentation](./auto-analysis.md)
 - [Auto Fix Documentation](./auto-fix.md)
-- [User Guide - Testing](../guides/user-guide.md#testing)
-- [Developer Guide - Testing](../guides/developer-guide.md#testing)
+- [User Guide - Testing](../guides/user-guide.md#testing-projects)
+- [Developer Guide - Testing](../guides/developer-guide.md#testing-projects)
 
 ---
 
