@@ -1527,7 +1527,7 @@ GET /projects?status=ready&template=dashboard&sort=updated&order=desc
 - **Documentation:** https://docs.aibuild.dev
 - **API Status:** https://status.aibuild.dev
 - **Support:** support@aibuild.dev
-- **GitHub:** https://github.com/aibuild/aibuild
+- **GitHub:** https://github.com/SolanaRemix/AiBuild
 
 ---
 
