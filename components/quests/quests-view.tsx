@@ -1,6 +1,6 @@
 "use client"
 
-import { GlowCard, GlowBadge, GlowButton } from "@/components/aura"
+import { GlowCard, GlowBadge } from "@/components/aura"
 import {
   Sword,
   Trophy,
