@@ -9,7 +9,6 @@ import {
   Copy,
   Archive,
   X,
-  ChevronRight,
   Sparkles,
   MessageSquare,
   Code2,
