@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { GlowShell, GlowSidebar } from "@/components/aura"
 import { AppHeader } from "@/components/layout/app-header"
 import { userSections, devSections, adminSections } from "@/lib/sidebar-config"
 
 const allSections = [...userSections, ...devSections, ...adminSections]
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+function AppLayoutInner({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
@@ -48,5 +48,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </main>
       </div>
     </GlowShell>
+  )
+}
+
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={null}>
+      <AppLayoutInner>{children}</AppLayoutInner>
+    </Suspense>
   )
 }
