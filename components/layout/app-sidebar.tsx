@@ -1,8 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useSyncExternalStore } from "react"
 import { cn } from "@/lib/utils"
+
+function usePathnameStable() {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("popstate", cb)
+      return () => window.removeEventListener("popstate", cb)
+    },
+    () => window.location.pathname,
+    () => "/"
+  )
+}
 import {
   FolderOpen,
   Bot,
@@ -133,7 +144,7 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({ collapsed = false }: AppSidebarProps) {
-  const pathname = usePathname()
+  const pathname = usePathnameStable()
 
   return (
     <aside

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useSyncExternalStore } from "react"
 import type { LucideIcon } from "lucide-react"
 
 export interface SidebarSection {
@@ -22,8 +22,19 @@ interface GlowSidebarProps {
   className?: string
 }
 
+function usePathnameStable() {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("popstate", cb)
+      return () => window.removeEventListener("popstate", cb)
+    },
+    () => window.location.pathname,
+    () => "/"
+  )
+}
+
 export function GlowSidebar({ sections, className }: GlowSidebarProps) {
-  const pathname = usePathname()
+  const pathname = usePathnameStable()
 
   return (
     <aside

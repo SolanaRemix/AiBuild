@@ -1,11 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { GlowButton } from "@/components/aura"
 import { Zap, Menu, X, User, Moon, Sun } from "lucide-react"
-import { useState } from "react"
+import { useState, useSyncExternalStore } from "react"
 
 interface AppHeaderProps {
   onMobileMenuToggle?: () => void
@@ -26,8 +25,19 @@ function getContextTitle(pathname: string): string {
   return ""
 }
 
+function usePathnameStable() {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("popstate", cb)
+      return () => window.removeEventListener("popstate", cb)
+    },
+    () => window.location.pathname,
+    () => "/"
+  )
+}
+
 export function AppHeader({ onMobileMenuToggle, mobileMenuOpen }: AppHeaderProps) {
-  const pathname = usePathname()
+  const pathname = usePathnameStable()
   const [darkMode, setDarkMode] = useState(true)
   const contextTitle = getContextTitle(pathname)
 

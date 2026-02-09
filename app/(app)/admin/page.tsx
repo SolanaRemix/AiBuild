@@ -1,6 +1,6 @@
 import { AdminOverview } from "@/components/admin/admin-overview"
+import { AdminHeaderBar } from "@/components/admin/admin-header-bar"
 import { TraceLogViewer } from "@/components/admin/trace-log-viewer"
-import { GlowButton } from "@/components/aura"
 import { mockTraceLogs } from "@/lib/mock-data"
 import Link from "next/link"
 import { Users, Brain, Blocks, Receipt, Flag, Server } from "lucide-react"
@@ -17,10 +17,7 @@ const quickLinks = [
 export default function AdminPage() {
   return (
     <div className="flex flex-col gap-10">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">Admin Panel</h1>
-        <p className="text-sm text-muted-foreground">System overview and quick access to all admin tools</p>
-      </div>
+      <AdminHeaderBar />
 
       {/* Quick nav */}
       <div className="grid gap-3 grid-cols-3 sm:grid-cols-6">
