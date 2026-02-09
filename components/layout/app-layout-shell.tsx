@@ -1,15 +1,25 @@
 "use client"
 
-import { useState } from "react"
-import { usePathname } from "next/navigation"
+import { useState, useSyncExternalStore } from "react"
 import { AppSidebar } from "./app-sidebar"
 import { AppTopBar } from "./app-top-bar"
 import { cn } from "@/lib/utils"
 
+function usePathnameStable() {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("popstate", cb)
+      return () => window.removeEventListener("popstate", cb)
+    },
+    () => window.location.pathname,
+    () => "/"
+  )
+}
+
 export function AppLayoutShell({ children }: { children: React.ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const pathname = usePathname()
+  const pathname = usePathnameStable()
 
   // Workspace pages need full height (e.g. project workspace)
   const isWorkspace = pathname.startsWith("/projects/")

@@ -1,9 +1,20 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { useSyncExternalStore } from "react"
 import { GlowButton } from "@/components/aura"
 import { Menu, PanelLeftClose, Bell, Search } from "lucide-react"
 import Link from "next/link"
+
+function usePathnameStable() {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("popstate", cb)
+      return () => window.removeEventListener("popstate", cb)
+    },
+    () => window.location.pathname,
+    () => "/"
+  )
+}
 
 interface AppTopBarProps {
   onToggleSidebar: () => void
@@ -42,7 +53,7 @@ function getContextTitle(pathname: string): string {
 }
 
 export function AppTopBar({ onToggleSidebar, onToggleMobile }: AppTopBarProps) {
-  const pathname = usePathname()
+  const pathname = usePathnameStable()
   const title = getContextTitle(pathname)
 
   return (
