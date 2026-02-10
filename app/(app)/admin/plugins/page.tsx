@@ -74,7 +74,7 @@ export default function PluginsPage() {
               
               <div className="flex flex-wrap gap-2 mb-3">
                 {model.capabilities.map((cap) => (
-                  <GlowBadge key={cap} size="sm" variant="default">
+                  <GlowBadge key={cap} variant="default">
                     {cap}
                   </GlowBadge>
                 ))}
@@ -84,7 +84,7 @@ export default function PluginsPage() {
                 <span className="text-muted-foreground">
                   Cost: <span className="capitalize">{model.costTier}</span>
                 </span>
-                <GlowBadge variant={model.enabled ? "success" : "default"} size="sm">
+                <GlowBadge variant={model.enabled ? "success" : "default"}>
                   {model.enabled ? "Active" : "Disabled"}
                 </GlowBadge>
               </div>
