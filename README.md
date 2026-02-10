@@ -1,343 +1,389 @@
-🚀 AiBuild / CyberAi
+# 🚀 AiBuild - Full-Stack SaaS Platform
 
-Multi‑Model AI Code Builder • Web • Mobile • Desktop • Admin/Dev/User Control Planes • Aura FX Neo‑Glow UI
+> Multi-Role AI Code Builder with Admin, User, and Developer Control Planes
 
+A production-ready, role-based SaaS platform built with Next.js, TypeScript, Prisma, and NextAuth. Features three distinct control panels with beautiful Aura FX Neo-Glow UI design.
 
-
----
-
-🌌 Overview
-
-AiBuild / CyberAi is a v0‑style, multi‑model AI code builder that turns natural language prompts into fully deployable applications across:
-
-• Web (Next.js)
-• Mobile (React Native / Expo → APK)
-• Desktop (Electron / Tauri)
-• APIs & SDKs
-• Plugins / Modules
-
-
-Powered by a multi‑model CyberAi agent (GPT, Gemini, Claude, Grok, and free/public coding models), AiBuild provides:
-
-• ⚡ Prompt → Project → GitHub → Deploy
-• 📱 APK & Desktop builds
-• 🧠 Logic‑flow detection + fix‑memory
-• 🧩 Dynamic plugins & modules
-• 🛠️ Admin, Dev, and User control panels
-• 🌈 Aura FX Neo‑Glow UI (Blue/Green/Purple)
-• 🔍 Full observability (logs, traces, sensors)
-• 🔐 Secure, governed, operator‑grade architecture
-
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748)](https://www.prisma.io/)
+[![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
 ---
 
-🧬 Architecture Summary
+## ✨ Features
 
-AiBuild is built as a modular monorepo:
+### 🔐 Authentication & Security
+- **NextAuth v4** with JWT-based credentials provider
+- Role-based authentication (ADMIN, USER, DEV)
+- Automatic role-based routing and middleware protection
+- Production secret validation
+- Prisma singleton pattern for optimal database connections
 
-/apps/web              → Next.js app (landing, user, dev, admin)
-/apps/agent            → CyberAi multi‑model agent runtime
-/apps/build-worker     → APK + desktop build orchestrator
-/packages/ui           → Aura FX Neo‑Glow component library
-/packages/sdk          → Public JS/TS SDK
-/packages/api          → Shared API types + client
-/packages/config       → Shared config (env, models, routing)
-/prisma                → Database schema
+### 👥 Three Role-Based Panels
 
+#### 🛡️ Admin Panel (`/admin`)
+- User management (view, edit, delete, assign roles)
+- Plugin manager with AI model toggles
+- System logs and analytics viewer
+- Plans & billing oversight
+- Feature flags configuration
 
----
+#### 👤 User Panel (`/dashboard`)
+- Project creation and management
+- Billing and subscription management
+- Profile settings and customization
+- Agent configuration
+- Quest and affiliate tracking
 
-🧠 CyberAi Multi‑Model Agent
+#### 🧑‍💻 Developer Panel (`/dev`)
+- Deployment history and status
+- Real-time application logs
+- SDK & API key management
+- Webhook configuration
+- System status monitoring
 
-Model	Role	Notes	
-GPT‑4.x	Primary codegen	High‑quality generation	
-Gemini	Planning + analysis	Strong reasoning	
-Claude	Refactoring	Clean, structured output	
-Grok	Fast iteration	Free/low‑cost cycles	
-Open‑source models	Bulk tasks	Cost‑efficient	
-
-
-CyberAi includes:
-
-• Model registry
-• Routing policy
-• Prompt logging
-• Trace logging
-• Fix‑memory
-• Logic‑flow detector
-• Safety guards
-• JSON schema validation
-
-
----
-
-🗄️ Database Schema (Prisma)
-
-Core tables:
-
-• Project
-• File
-• Deployment
-• GitHubBinding
-• ModelProviderConfig
-• PromptLog
-• TraceLog
-• FixMemory
-
-
-Designed for:
-
-• Full rebuildability
-• Auditability
-• Multi‑target builds
-• Multi‑model routing
-
+### 🎨 UI/UX Design
+- **Aura FX Neo-Glow** theme (Blue/Green/Purple)
+- Dark mode by default
+- Glassmorphism and neon glow effects
+- Fully responsive (mobile + desktop)
+- Accessible components (ARIA labels, screen reader support)
 
 ---
 
-🖥️ Control Planes
+## 🚀 Quick Start
 
-👤 User Dashboard
+### Prerequisites
 
-• Projects
-• Agents
-• Billing
-• Affiliate
-• Quests
-• Settings
+- **Node.js** 20.x (LTS) or higher
+- **pnpm** (recommended) or npm
+- **PostgreSQL** database (local or cloud via [Neon.tech](https://neon.tech))
 
+### 1. Install Dependencies
 
-🧑‍💻 Developer Panel
-
-• Deployments
-• Logs (AI, builds, tests)
-• SDK keys
-• Webhooks
-• System status
-
-
-🛡️ Admin Panel
-
-• Users
-• Models
-• Agents
-• Plans & Billing
-• Affiliate config
-• Quests config
-• System flags
-
-
----
-
-🎨 Aura FX Neo‑Glow UI System
-
-Mode	Palette	Effects	
-Dark	#020617 + neon blue/green/purple	Glow, glass, blur	
-Light	#f9fafb + pastel glow	Soft, minimal	
-
-
-Components:
-
-• GlowShell
-• GlowCard
-• GlowButton
-• GlowInput
-• GlowTabs
-• GlowSidebar
-
-
----
-
-🧩 Modules & Plugins
-
-AiBuild supports dynamic add‑ons:
-
-• UI templates
-• Component packs
-• Agent behaviors
-• Model adapters
-• Build pipelines
-• Deployment providers
-• Analytics plugins
-
-
-Each plugin is a self‑contained package with:
-
-• Manifest
-• Config
-• Hooks
-• UI components
-• API routes
-
-
----
-
-⚙️ API & SDK
-
-REST API
-
-Endpoints include:
-
-• /api/generate-project
-• /api/projects
-• /api/projects/[id]
-• /api/projects/[id]/files
-• /api/projects/[id]/sync/github
-• /api/projects/[id]/deploy/vercel
-• /api/projects/[id]/build/apk
-• /api/projects/[id]/build/desktop
-
-
-SDK (TypeScript)
-
-import { AiBuild } from "@aibuild/sdk";
-
-const client = new AiBuild({ apiKey: process.env.AIBUILD_KEY });
-
-const project = await client.projects.create({
-  prompt: "Build a crypto dashboard",
-  target: "web",
-});
-
-
----
-
-🚀 Deployment
-
-AiBuild is Vercel‑native:
-
-• Auto‑detects environment
-• Auto‑creates required env vars
-• Auto‑binds GitHub repo
-• Auto‑configures build hooks
-• Auto‑deploys web targets
-
-
-Mobile & desktop builds run via:
-
-• Build worker
-• GitHub Actions
-• Local runners
-
-
----
-
-🧪 Testing
-
-Includes:
-
-• Unit tests
-• Integration tests
-• Build tests
-• Agent tests
-• API tests
-
-
----
-
-📊 Comparison Table
-
-Feature	Vercel v0	AiBuild v0	AiBuild CyberAi	
-Prompt → App	✅	✅	⚡ Enhanced multi‑model	
-Multi‑model agent	❌	⚠️ Limited	🧠 GPT + Gemini + Claude + Grok	
-Mobile APK builds	❌	❌	📱 Yes	
-Desktop builds	❌	❌	🖥️ Yes	
-Admin panel	❌	❌	🛡️ Full	
-Dev panel	❌	❌	🧑‍💻 Full	
-User dashboard	Basic	Good	✨ Full suite	
-Plugins/modules	❌	⚠️ Partial	🧩 Dynamic	
-Observability	Basic	Good	🔍 Full logs/traces/sensors	
-UI theme	Minimal	Good	🌈 Aura FX Neo‑Glow	
-
-
----
-
-📚 User Guide
-
-1. Create a Project
-
-1. Go to dashboard
-2. Click New Project
-3. Enter prompt
-4. Choose target (Web/Mobile/Desktop)
-5. Generate
-
-
-2. Edit Code
-
-• Use file tree
-• Use Monaco editor
-• Use AI “Regenerate file”
-
-
-3. Sync to GitHub
-
-• Click Sync to GitHub
-• Choose repo/branch
-
-
-4. Deploy
-
-• Web → Vercel
-• Mobile → APK build
-• Desktop → Installer build
-
-
-5. Manage Agents
-
-• Create personal agents
-• Choose models
-• Configure behavior
-
-
-6. Admin/Dev Panels
-
-• Manage users, models, plans
-• View logs, deployments
-• Configure system
-
-
----
-
-🛠️ Local Development
-
+```bash
+# Using pnpm (recommended)
 pnpm install
+
+# Or using npm
+npm install --legacy-peer-deps
+```
+
+### 2. Environment Configuration
+
+Create a `.env` file in the project root:
+
+```env
+# Database Connection
+DATABASE_URL="postgresql://user:password@host:5432/database?schema=public"
+
+# NextAuth Configuration
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secure-random-secret"  # Generate: openssl rand -base64 32
+```
+
+### 3. Database Setup
+
+```bash
+# Generate Prisma client
+pnpm exec prisma generate
+
+# Create database schema
+pnpm exec prisma db push
+
+# Seed database with default users
+pnpm run db:seed
+```
+
+<details>
+<summary>Using npm instead of pnpm</summary>
+
+```bash
+npx prisma generate
+npx prisma db push
+npm run db:seed
+```
+</details>
+
+### 4. Run Development Server
+
+```bash
+# Start the development server
 pnpm dev
 
+# Server will be available at http://localhost:3000
+```
+
+### 5. Login with Default Credentials
+
+| Role      | Email              | Password   | Access Panel |
+|-----------|-------------------|------------|--------------|
+| Admin     | admin@admin.com   | Admin123$  | `/admin`     |
+| User      | user@aibuild.com  | Admin123$  | `/dashboard` |
+| Developer | dev@aibuild.com   | Admin123$  | `/dev`       |
 
 ---
 
-🤝 Contributing
+## 📦 Available Commands
 
-We welcome:
+### Development
 
-• Plugins
-• Templates
-• Model adapters
-• Build pipelines
-• UI components
+```bash
+# Start development server with hot reload
+pnpm dev
 
+# Run TypeScript type checking
+pnpm lint
+
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
+```
+
+### Database Management
+
+```bash
+# Generate Prisma client (after schema changes)
+pnpm exec prisma generate
+
+# Push schema changes to database (development)
+pnpm exec prisma db push
+
+# Create a new migration (production-ready)
+pnpm exec prisma migrate dev --name migration_name
+
+# Apply migrations in production
+pnpm exec prisma migrate deploy
+
+# Seed database with initial data
+pnpm run db:seed
+
+# Open Prisma Studio (database GUI)
+pnpm exec prisma studio
+```
+
+### Testing & Quality
+
+```bash
+# Run type checking
+pnpm lint
+
+# Format code
+pnpm format  # if configured
+
+# Run tests
+pnpm test    # if configured
+```
 
 ---
 
-📄 License
+## 🗂️ Project Structure
 
-MIT
+```
+.
+├── app/                      # Next.js App Router
+│   ├── (app)/               # Protected app routes
+│   │   ├── admin/           # Admin panel pages
+│   │   ├── dashboard/       # User dashboard pages
+│   │   └── dev/             # Developer panel pages
+│   ├── api/                 # API routes
+│   │   └── auth/            # NextAuth endpoints
+│   ├── login/               # Shared login page
+│   └── layout.tsx           # Root layout
+│
+├── components/              # React components
+│   ├── aura/               # Glow UI components
+│   ├── admin/              # Admin-specific components
+│   ├── dashboard/          # Dashboard components
+│   ├── dev/                # Dev panel components
+│   └── auth/               # Authentication components
+│
+├── lib/                     # Utility libraries
+│   ├── auth.ts             # NextAuth configuration
+│   ├── prisma.ts           # Prisma singleton
+│   └── utils.ts            # Helper functions
+│
+├── prisma/                  # Database
+│   ├── schema.prisma       # Database schema
+│   └── seed.ts             # Database seeding
+│
+├── types/                   # TypeScript type definitions
+├── middleware.ts            # Next.js middleware (auth)
+├── .env.example            # Environment variables template
+└── README.md               # This file
+```
 
 ---
 
-❤️ Maintained by SolanaRemix / AiBuild
+## 🗄️ Database Schema
 
-Repo: https://github.com/SolanaRemix/AiBuild
+### Models
+
+- **User** - User accounts with role-based access
+- **Project** - User-created projects
+- **Deployment** - Deployment history and status
+
+### Roles
+
+- `ADMIN` - Full system access
+- `USER` - Standard user access
+- `DEV` - Developer tool access
+
+See [`prisma/schema.prisma`](./prisma/schema.prisma) for complete schema definition.
 
 ---
 
- README is aligned with your entire architecture.
+## 🚢 Deployment
 
-  CONTRIBUTING.md
-• A SECURITY.md
-• A ROADMAP.md
-• A MODULES.md (plugin system spec)
-• A DEPLOYMENT.md
-• A GOVERNANCE.md
-• A BRANDING.md
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import project in [Vercel](https://vercel.com)
+3. Configure environment variables:
+   - `DATABASE_URL`
+   - `NEXTAUTH_SECRET`
+   - `NEXTAUTH_URL` (your production URL)
+4. Deploy!
+
+### Environment Variables
+
+Required for production:
+
+- `DATABASE_URL` - PostgreSQL connection string
+- `NEXTAUTH_SECRET` - Secret for JWT signing (32+ characters)
+- `NEXTAUTH_URL` - Public URL of your application
+
+### CI/CD
+
+The project includes a GitHub Actions workflow at `.github/workflows/ci-deploy.yml` that:
+
+- Installs dependencies with pnpm
+- Generates Prisma client
+- Runs linting and type checking
+- Builds the application
+- Deploys to Vercel (on main branch)
+
+Required GitHub Secrets:
+- `DATABASE_URL`
+- `NEXTAUTH_SECRET`
+- `NEXTAUTH_URL`
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+---
+
+## 🎨 UI Components
+
+### Aura FX Glow Components
+
+- `GlowButton` - Neon-glow button with hover effects
+- `GlowCard` - Glassy card with gradient borders
+- `GlowInput` - Styled input with focus ring
+- `GlowTabs` - Tabbed navigation
+- `GlowBadge` - Status badges
+- `GlowSidebar` - Navigation sidebar
+
+All components support:
+- Dark mode
+- Responsive design
+- Accessibility (ARIA attributes)
+- TypeScript type safety
+
+---
+
+## 🔒 Security
+
+- ✅ Passwords hashed with bcrypt (10 rounds)
+- ✅ JWT-based session management
+- ✅ HTTP-only cookies
+- ✅ Role-based access control via middleware
+- ✅ Production secret validation
+- ✅ Environment variable security
+- ✅ Prisma singleton pattern (prevents connection leaks)
+
+---
+
+## 🛠️ Troubleshooting
+
+### Database Connection Issues
+
+```bash
+# Verify DATABASE_URL is correct
+echo $DATABASE_URL
+
+# Test database connection
+pnpm exec prisma db push
+```
+
+### Build Errors
+
+```bash
+# Regenerate Prisma client
+pnpm exec prisma generate
+
+# Clear Next.js cache
+rm -rf .next
+
+# Reinstall dependencies
+rm -rf node_modules && pnpm install
+```
+
+### Authentication Issues
+
+- Ensure `NEXTAUTH_SECRET` is set and matches across environments
+- Verify `NEXTAUTH_URL` matches your domain
+- Clear browser cookies and try again
+
+---
+
+## 📚 Documentation
+
+- [Architecture Documentation](./ARCHITECTURE.md) - Complete system architecture
+- [Setup Guide](./README_SETUP.md) - Detailed installation guide
+- [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute (if exists)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](./LICENSE) file for details
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Database with [Prisma](https://www.prisma.io/)
+- Authentication with [NextAuth.js](https://next-auth.js.org/)
+
+---
+
+## 📧 Support
+
+For issues and questions:
+- 🐛 [Report a bug](https://github.com/SolanaRemix/AiBuild/issues)
+- 💡 [Request a feature](https://github.com/SolanaRemix/AiBuild/issues)
+- 📖 [View documentation](./ARCHITECTURE.md)
+
+---
+
+**Maintained by [SolanaRemix](https://github.com/SolanaRemix)**
+
+Repository: [github.com/SolanaRemix/AiBuild](https://github.com/SolanaRemix/AiBuild)
