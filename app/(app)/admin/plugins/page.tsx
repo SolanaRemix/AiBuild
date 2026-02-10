@@ -54,11 +54,15 @@ export default function PluginsPage() {
                   </div>
                 </div>
                 <button
+                <button
                   type="button"
                   onClick={() => toggleModel(model.id)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                     model.enabled ? "bg-primary" : "bg-muted"
                   }`}
+                  role="switch"
+                  aria-checked={model.enabled}
+                  aria-label={`Toggle ${model.name}`}
                   role="switch"
                   aria-checked={model.enabled}
                   aria-label={`Toggle ${model.name}`}
