@@ -3,15 +3,13 @@ import { AdminHeaderBar } from "@/components/admin/admin-header-bar"
 import { TraceLogViewer } from "@/components/admin/trace-log-viewer"
 import { mockTraceLogs } from "@/lib/mock-data"
 import Link from "next/link"
-import { Users, Brain, Blocks, Receipt, Flag, Server } from "lucide-react"
+import { Users, Puzzle, Receipt, Server } from "lucide-react"
 
 const quickLinks = [
   { label: "Users", href: "/admin/users", icon: Users },
-  { label: "Models", href: "/admin/models", icon: Brain },
-  { label: "Agents", href: "/admin/agents", icon: Blocks },
+  { label: "Plugins", href: "/admin/plugins", icon: Puzzle },
   { label: "Plans", href: "/admin/plans", icon: Receipt },
-  { label: "Flags", href: "/admin/flags", icon: Flag },
-  { label: "System", href: "/admin/system", icon: Server },
+  { label: "Logs", href: "/admin/system", icon: Server },
 ]
 
 export default function AdminPage() {
@@ -20,7 +18,7 @@ export default function AdminPage() {
       <AdminHeaderBar />
 
       {/* Quick nav */}
-      <div className="grid gap-3 grid-cols-3 sm:grid-cols-6">
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
         {quickLinks.map((link) => {
           const Icon = link.icon
           return (
