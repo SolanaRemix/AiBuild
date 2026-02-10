@@ -5,10 +5,15 @@
 ### Prerequisites
 - Node.js 20.x (LTS)
 - PostgreSQL database (local or cloud via Neon.tech)
-- npm or pnpm
+- pnpm (recommended) or npm
 
 ### 1. Install Dependencies
 
+```bash
+pnpm install
+```
+
+Or with npm:
 ```bash
 npm install --legacy-peer-deps
 ```
@@ -30,12 +35,19 @@ NEXTAUTH_SECRET="your-secure-random-secret-key-here"
 
 ```bash
 # Generate Prisma client
-npx prisma generate
+pnpm exec prisma generate
 
 # Create database tables
-npx prisma db push
+pnpm exec prisma db push
 
 # Seed with default users
+pnpm run db:seed
+```
+
+Or with npm:
+```bash
+npx prisma generate
+npx prisma db push
 npm run db:seed
 ```
 
@@ -46,6 +58,11 @@ This will create 3 users:
 
 ### 4. Run Development Server
 
+```bash
+pnpm dev
+```
+
+Or with npm:
 ```bash
 npm run dev
 ```
@@ -68,9 +85,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```bash
 # Build the application
-npm run build
+pnpm build
 
 # Start production server
+pnpm start
+```
+
+Or with npm:
+```bash
+npm run build
 npm start
 ```
 
@@ -80,21 +103,31 @@ npm start
 
 ```bash
 # Generate Prisma Client (after schema changes)
-npx prisma generate
+pnpm exec prisma generate
 
 # Push schema to database (development)
-npx prisma db push
+pnpm exec prisma db push
 
 # Create a migration (production-ready)
-npx prisma migrate dev --name <migration_name>
+pnpm exec prisma migrate dev --name <migration_name>
 
 # Apply migrations (production)
-npx prisma migrate deploy
+pnpm exec prisma migrate deploy
 
 # Seed database
-npm run db:seed
+pnpm run db:seed
 
 # Open Prisma Studio (database GUI)
+pnpm exec prisma studio
+```
+
+Or with npm/npx:
+```bash
+npx prisma generate
+npx prisma db push
+npx prisma migrate dev --name <migration_name>
+npx prisma migrate deploy
+npm run db:seed
 npx prisma studio
 ```
 
@@ -236,6 +269,11 @@ Required GitHub Secrets:
 - Ensure database exists
 
 ### Build Errors
+- Run `pnpm exec prisma generate` after schema changes
+- Clear `.next` folder: `rm -rf .next`
+- Reinstall dependencies: `rm -rf node_modules && pnpm install`
+
+Or with npm:
 - Run `npx prisma generate` after schema changes
 - Clear `.next` folder: `rm -rf .next`
 - Reinstall dependencies: `rm -rf node_modules && npm install --legacy-peer-deps`

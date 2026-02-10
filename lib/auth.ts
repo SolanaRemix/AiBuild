@@ -1,9 +1,14 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcryptjs"
+import { prisma } from "./prisma"
 
-const prisma = new PrismaClient()
+// Validate NEXTAUTH_SECRET in production
+if (process.env.NODE_ENV === "production" && !process.env.NEXTAUTH_SECRET) {
+  throw new Error(
+    "NEXTAUTH_SECRET must be set in production. Generate one with: openssl rand -base64 32"
+  )
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -62,5 +67,5 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET || "dev-secret-change-in-production",
+  secret: process.env.NEXTAUTH_SECRET || "dev-secret-for-local-development-only",
 }
