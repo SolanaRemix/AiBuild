@@ -1,20 +1,42 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm run prepare:vercel && pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
-  "_comment": "Environment variables: @name syntax references Vercel environment variables configured in dashboard (Project Settings → Environment Variables). These are automatically injected at build and runtime.",
+  "_comment_env": "Environment variables: @name syntax references Vercel environment variables configured in dashboard (Project Settings → Environment Variables). These are automatically injected at build and runtime.",
+  "_comment_build": "prepare:vercel runs Prisma generate and validates environment before build. See scripts/prepare-vercel.ts for details.",
   "env": {
     "DATABASE_URL": "@database_url",
     "NEXTAUTH_SECRET": "@nextauth_secret",
-    "NEXTAUTH_URL": "@nextauth_url"
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NODE_ENV": "production"
   },
   "build": {
     "env": {
       "DATABASE_URL": "@database_url",
       "NEXTAUTH_SECRET": "@nextauth_secret",
-      "NEXTAUTH_URL": "@nextauth_url"
+      "NEXTAUTH_URL": "@nextauth_url",
+      "NODE_ENV": "production"
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
 }

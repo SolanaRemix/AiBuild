@@ -178,6 +178,43 @@ pnpm format  # if configured
 pnpm test    # if configured
 ```
 
+### Utility Scripts
+
+```bash
+# Verify environment variables (before build/deploy)
+pnpm run verify:env
+
+# Generate environment variable template
+pnpm run verify:env:template
+
+# Prepare for Vercel deployment (validates env + generates Prisma client)
+pnpm run prepare:vercel
+```
+
+<details>
+<summary>Script Details</summary>
+
+- **`verify:env`**: Validates all required environment variables are present and correctly formatted. Useful before deploying or running in production.
+- **`verify:env:template`**: Generates a template showing all required environment variables with descriptions and requirements.
+- **`prepare:vercel`**: Runs all pre-build steps needed for Vercel deployment (Prisma generation, environment validation).
+
+Example output:
+```bash
+$ pnpm run verify:env
+
+🔍 Verifying environment variables...
+
+   NODE_ENV: production
+   Context: Local
+
+   ✅ DATABASE_URL (build, runtime)
+   ✅ NEXTAUTH_SECRET (runtime)
+   ✅ NEXTAUTH_URL (runtime)
+
+✅ Environment validation passed!
+```
+</details>
+
 ---
 
 ## 🗂️ Project Structure
