@@ -4,7 +4,7 @@
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
-  "regions": ["iad1"],
+  "_comment": "Environment variables: @name syntax references Vercel environment variables configured in dashboard (Project Settings → Environment Variables). These are automatically injected at build and runtime.",
   "env": {
     "DATABASE_URL": "@database_url",
     "NEXTAUTH_SECRET": "@nextauth_secret",

@@ -38,11 +38,17 @@ AiBuild requires the following environment variables for both **build time** and
 
 **Generate `NEXTAUTH_SECRET`:**
 ```bash
-# On Linux/macOS
+# On Linux/macOS/WSL
 openssl rand -base64 32
 
-# Or use Node.js
+# On Windows (PowerShell)
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+
+# Or use Node.js (cross-platform)
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+
+# Online generator (fallback)
+# Visit: https://generate-secret.vercel.app/32
 ```
 
 ---
