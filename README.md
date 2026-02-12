@@ -238,41 +238,53 @@ See [`prisma/schema.prisma`](./prisma/schema.prisma) for complete schema definit
 
 ## 🚢 Deployment
 
-### Deploy to Vercel
+### Quick Deploy to Vercel
 
 1. Push your code to GitHub
 2. Import project in [Vercel](https://vercel.com)
-3. Configure environment variables:
-   - `DATABASE_URL`
-   - `NEXTAUTH_SECRET`
-   - `NEXTAUTH_URL` (your production URL)
+3. Configure environment variables (see below)
 4. Deploy!
 
-### Environment Variables
+**📖 Complete Guide:** See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
 
-Required for production:
+### Required Environment Variables
 
-- `DATABASE_URL` - PostgreSQL connection string
-- `NEXTAUTH_SECRET` - Secret for JWT signing (32+ characters)
-- `NEXTAUTH_URL` - Public URL of your application
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `DATABASE_URL` | PostgreSQL connection | `postgresql://user:pass@host:5432/db` |
+| `NEXTAUTH_SECRET` | JWT signing secret (32+ chars) | `openssl rand -base64 32` |
+| `NEXTAUTH_URL` | Public URL | `https://your-app.vercel.app` |
 
-### CI/CD
+**All variables required for both build time and runtime**
 
-The project includes a GitHub Actions workflow at `.github/workflows/ci-deploy.yml` that:
+### Vercel Configuration
 
-- Installs dependencies with pnpm
-- Generates Prisma client
-- Runs linting and type checking
-- Builds the application
-- Deploys to Vercel (on main branch)
+The project includes `vercel.json` with optimal settings:
+- **Framework**: Next.js (App Router)
+- **Build Command**: `pnpm run build`
+- **Install Command**: `pnpm install --no-frozen-lockfile`
+- **Region**: `iad1` (US East)
 
-Required GitHub Secrets:
-- `DATABASE_URL`
-- `NEXTAUTH_SECRET`
-- `NEXTAUTH_URL`
-- `VERCEL_TOKEN`
-- `VERCEL_ORG_ID`
-- `VERCEL_PROJECT_ID`
+### CI/CD Pipeline
+
+Automated via GitHub Actions (`.github/workflows/ci-deploy.yml`):
+
+**For Pull Requests:**
+- ✅ Lint checking
+- ✅ Type checking
+- ✅ Build validation
+- ⚠️ Uses test environment (no production secrets needed)
+
+**For Main Branch:**
+- ✅ All checks above
+- ✅ Prisma migrations (`prisma migrate deploy`)
+- ✅ Vercel production deployment
+
+**Required GitHub Secrets:**
+- `DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`
+- `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+
+**Note:** Fork PRs can run without secrets - workflow uses dummy values for test builds
 
 ---
 
@@ -342,9 +354,10 @@ rm -rf node_modules && pnpm install
 
 ## 📚 Documentation
 
-- [Architecture Documentation](./ARCHITECTURE.md) - Complete system architecture
-- [Setup Guide](./README_SETUP.md) - Detailed installation guide
-- [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute (if exists)
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete Vercel deployment guide with environment variables, troubleshooting, and CI/CD setup
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture, UI/UX specifications, and database schema
+- **[README_SETUP.md](./README_SETUP.md)** - Detailed local development setup instructions
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines (if exists)
 
 ---
 
