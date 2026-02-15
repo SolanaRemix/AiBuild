@@ -1,8 +1,10 @@
 "use client"
 
-import Link from "next/link"
+import { Menu, Bell, User, LogIn } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { GlowButton } from "@/components/aura"
 import { GlowButton } from "@/components/aura"
 import { Zap, Menu, X, User, Moon, Sun } from "lucide-react"
 import { useState } from "react"
@@ -77,9 +79,24 @@ export function AppHeader({ onMobileMenuToggle, mobileMenuOpen }: AppHeaderProps
           >
             {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 border border-primary/20">
-            <User className="h-4 w-4 text-primary" />
-          </div>
+          {pathname === "/" ? (
+            <>
+              <Link href="/login">
+                <GlowButton variant="outline" size="sm">
+                  Sign In
+                </GlowButton>
+              </Link>
+              <Link href="/register">
+                <GlowButton size="sm">
+                  Get Started
+                </GlowButton>
+              </Link>
+            </>
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 border border-primary/20">
+              <User className="h-4 w-4 text-primary" />
+            </div>
+          )}
         </div>
       </div>
     </header>
