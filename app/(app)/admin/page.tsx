@@ -18,29 +18,41 @@ export default function AdminPage() {
   return (
     <div className="flex flex-col gap-10">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">Admin Panel</h1>
-        <p className="text-sm text-muted-foreground">System overview and quick access to all admin tools</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Admin Dashboard</h1>
+        <p className="text-muted-foreground">Monitor system health, manage users, and configure platform settings</p>
       </div>
 
       {/* Quick nav */}
-      <div className="grid gap-3 grid-cols-3 sm:grid-cols-6">
-        {quickLinks.map((link) => {
-          const Icon = link.icon
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex flex-col items-center gap-2 rounded-lg border border-border bg-card p-4 text-center transition-all hover:border-glow-cyan hover:glow-blue"
-            >
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-xs font-medium text-foreground">{link.label}</span>
-            </Link>
-          )
-        })}
+      <div>
+        <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
+        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          {quickLinks.map((link) => {
+            const Icon = link.icon
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-5 text-center transition-all hover:border-primary/50 hover:glow-blue hover:scale-105"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <span className="text-xs font-medium text-foreground">{link.label}</span>
+              </Link>
+            )
+          })}
+        </div>
       </div>
 
-      <AdminOverview />
-      <TraceLogViewer logs={mockTraceLogs} />
+      <div>
+        <h2 className="text-lg font-semibold text-foreground mb-4">System Overview</h2>
+        <AdminOverview />
+      </div>
+      
+      <div>
+        <h2 className="text-lg font-semibold text-foreground mb-4">Recent Activity</h2>
+        <TraceLogViewer logs={mockTraceLogs} />
+      </div>
     </div>
   )
 }

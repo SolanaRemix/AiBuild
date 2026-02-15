@@ -20,6 +20,9 @@ import {
   Gamepad2,
   Server,
   Flag,
+  MessageSquare,
+  Send,
+  Frame,
 } from "lucide-react"
 
 export const userSections: SidebarSection[] = [
@@ -29,6 +32,14 @@ export const userSections: SidebarSection[] = [
       { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
       { label: "Projects", href: "/projects", icon: FolderOpen, badge: "4" },
       { label: "Agents", href: "/agents", icon: Bot },
+      { label: "AI Chat", href: "/chat", icon: MessageSquare },
+    ],
+  },
+  {
+    title: "Build",
+    items: [
+      { label: "Submissions", href: "/submissions", icon: Send },
+      { label: "Frames", href: "/frames", icon: Frame },
     ],
   },
   {
@@ -62,6 +73,7 @@ export const adminSections: SidebarSection[] = [
       { label: "Users", href: "/admin/users", icon: Users },
       { label: "Models", href: "/admin/models", icon: Brain },
       { label: "Agents", href: "/admin/agents", icon: Blocks },
+      { label: "Submissions", href: "/admin/submissions", icon: Send, badge: "12" },
       { label: "Plans & Billing", href: "/admin/plans", icon: Receipt },
       { label: "Affiliate Config", href: "/admin/affiliate", icon: Gift },
       { label: "Quests Config", href: "/admin/quests", icon: Gamepad2 },

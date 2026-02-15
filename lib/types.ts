@@ -214,3 +214,61 @@ export interface WebhookConfig {
   enabled: boolean
   lastTriggered: string | null
 }
+
+// Chat message types
+export interface ChatMessage {
+  id: string
+  role: "user" | "assistant"
+  content: string
+  timestamp: Date
+  tools?: { name: string; status: "running" | "complete" }[]
+  code?: string
+}
+
+export interface ChatModel {
+  id: string
+  name: string
+  provider: string
+}
+
+// App submission types
+export interface AppSubmission {
+  id: string
+  name: string
+  description: string
+  category: string
+  status: "pending" | "approved" | "rejected" | "review" | "flagged"
+  submittedAt: Date
+  author: string
+  email?: string
+  preview?: string
+  url?: string
+  reviewNotes?: string
+}
+
+// Farcaster frame types
+export interface FrameElement {
+  id: string
+  type: "text" | "button" | "image"
+  content: string
+  position: { x: number; y: number }
+  style?: {
+    fontSize?: string
+    color?: string
+    backgroundColor?: string
+  }
+}
+
+export interface FrameProject {
+  id: string
+  name: string
+  description: string
+  elements: FrameElement[]
+  metadata: {
+    title: string
+    description: string
+    image: string
+  }
+  createdAt: Date
+  published: boolean
+}

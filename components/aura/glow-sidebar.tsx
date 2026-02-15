@@ -48,18 +48,30 @@ export function GlowSidebar({ sections, className }: GlowSidebarProps) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+                    "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                     isActive
-                      ? "bg-primary/10 text-primary glow-blue"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "bg-primary/10 text-primary border border-primary/20 glow-blue"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:border hover:border-border"
                   )}
                 >
-                  <Icon className="h-4 w-4 shrink-0" />
+                  <Icon className={cn(
+                    "h-4 w-4 shrink-0 transition-transform duration-200",
+                    isActive && "text-primary",
+                    !isActive && "group-hover:scale-110"
+                  )} />
                   <span className="truncate">{item.label}</span>
                   {item.badge && (
-                    <span className="ml-auto rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-medium text-primary">
+                    <span className={cn(
+                      "ml-auto rounded-full px-2 py-0.5 text-[10px] font-semibold",
+                      isActive 
+                        ? "bg-primary/20 text-primary" 
+                        : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                    )}>
                       {item.badge}
                     </span>
+                  )}
+                  {isActive && (
+                    <div className="absolute inset-0 rounded-lg bg-primary/5 animate-pulse pointer-events-none" />
                   )}
                 </Link>
               )

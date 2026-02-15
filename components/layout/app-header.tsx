@@ -13,14 +13,17 @@ interface AppHeaderProps {
 }
 
 function getContextTitle(pathname: string): string {
-  if (pathname.startsWith("/admin")) return "Admin"
-  if (pathname.startsWith("/dev")) return "Dev"
+  if (pathname.startsWith("/admin")) return "Admin Panel"
+  if (pathname.startsWith("/dev")) return "Developer Tools"
   if (pathname.startsWith("/projects/")) return "Workspace"
   if (pathname.startsWith("/projects")) return "Projects"
-  if (pathname.startsWith("/agents")) return "Agents"
-  if (pathname.startsWith("/billing")) return "Billing"
-  if (pathname.startsWith("/affiliate")) return "Affiliate"
-  if (pathname.startsWith("/quests")) return "Quests"
+  if (pathname.startsWith("/agents")) return "AI Agents"
+  if (pathname.startsWith("/chat")) return "AI Chat"
+  if (pathname.startsWith("/submissions")) return "App Submissions"
+  if (pathname.startsWith("/frames")) return "Farcaster Frames"
+  if (pathname.startsWith("/billing")) return "Billing & Plans"
+  if (pathname.startsWith("/affiliate")) return "Affiliate Program"
+  if (pathname.startsWith("/quests")) return "Quests & Rewards"
   if (pathname.startsWith("/settings")) return "Settings"
   if (pathname.startsWith("/dashboard")) return "Dashboard"
   return ""
@@ -58,9 +61,11 @@ export function AppHeader({ onMobileMenuToggle, mobileMenuOpen }: AppHeaderProps
 
         {/* Center: context title */}
         {contextTitle && (
-          <span className="hidden md:block text-sm font-medium text-muted-foreground">
-            {contextTitle}
-          </span>
+          <div className="hidden md:flex items-center gap-2">
+            <span className="text-sm font-semibold text-foreground px-3 py-1 rounded-md bg-muted/50 border border-border">
+              {contextTitle}
+            </span>
+          </div>
         )}
 
         {/* Right: user actions */}
