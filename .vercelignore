@@ -61,6 +61,9 @@ prisma/migrations/
 
 # Scripts (only needed locally, not in production)
 scripts/
+# Allow deployment scripts required by Vercel build
+!scripts/prepare-vercel.ts
+!scripts/verify-env.ts
 
 # Test files
 **/*.test.ts
