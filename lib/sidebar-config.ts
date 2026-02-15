@@ -20,6 +20,7 @@ import {
   Gamepad2,
   Server,
   Flag,
+  Puzzle,
 } from "lucide-react"
 
 export const userSections: SidebarSection[] = [
@@ -60,12 +61,13 @@ export const adminSections: SidebarSection[] = [
     title: "Admin",
     items: [
       { label: "Users", href: "/admin/users", icon: Users },
+      { label: "Plugins", href: "/admin/plugins", icon: Puzzle },
+      { label: "Plans & Billing", href: "/admin/plans", icon: Receipt },
+      { label: "System Logs", href: "/admin/system", icon: Server },
       { label: "Models", href: "/admin/models", icon: Brain },
       { label: "Agents", href: "/admin/agents", icon: Blocks },
-      { label: "Plans & Billing", href: "/admin/plans", icon: Receipt },
       { label: "Affiliate Config", href: "/admin/affiliate", icon: Gift },
       { label: "Quests Config", href: "/admin/quests", icon: Gamepad2 },
-      { label: "System", href: "/admin/system", icon: Server },
       { label: "Feature Flags", href: "/admin/flags", icon: Flag },
     ],
   },
