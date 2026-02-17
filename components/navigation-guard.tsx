@@ -20,7 +20,6 @@ export function NavigationGuard() {
       const msg = String(error?.message ?? "")
       const stack = String(error?.stack ?? "")
       if (
-        error?.name === "AbortError" ||
         msg.includes("MetaMask") ||
         msg.includes("Navigation cancelled") ||
         stack.includes("chrome-extension://") ||
