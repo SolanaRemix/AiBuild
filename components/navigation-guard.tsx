@@ -19,7 +19,6 @@ export function NavigationGuard() {
       if (
         msg.includes("MetaMask") ||
         msg.includes("Navigation cancelled") ||
-        msg.includes("navigation") ||
         stack.includes("chrome-extension://") ||
         stack.includes("moz-extension://")
       ) {
