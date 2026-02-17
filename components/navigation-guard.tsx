@@ -8,7 +8,7 @@ export function NavigationGuard() {
       const error = event.reason
 
       // Suppress Next.js navigation abort errors
-      if (error instanceof DOMException && error.name === "AbortError") {
+      if (error?.name === "AbortError") {
         event.preventDefault()
         return
       }
