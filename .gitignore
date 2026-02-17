@@ -1,0 +1,26 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/lib/generated/prisma
+
+# Build outputs
+.next/
+out/
+dist/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Misc
+.DS_Store
+*.log
+.vscode/
+.idea/
+tsconfig.tsbuildinfo

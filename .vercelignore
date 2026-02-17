@@ -1,0 +1,93 @@
+# .vercelignore
+# 
+# Files and directories to exclude from Vercel deployments.
+# This reduces bundle size and speeds up deployments.
+#
+# ASSUMPTION: Following Next.js and Vercel best practices for file exclusion
+
+# Development files
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD (not needed in Vercel build)
+.github/
+.circleci/
+.travis.yml
+
+# Documentation (can be excluded if not needed for runtime)
+docs/
+*.md
+!README.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+
+# Build artifacts that will be regenerated
+.next/
+out/
+build/
+dist/
+
+# Dependencies (will be installed during build)
+node_modules/
+
+# Prisma
+prisma/migrations/
+# Keep schema.prisma - it's needed for prisma generate
+
+# Scripts (only needed locally, not in production)
+scripts/
+# Allow deployment scripts required by Vercel build
+!scripts/prepare-vercel.ts
+!scripts/verify-env.ts
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+__tests__/
+__mocks__/
+
+# Storybook
+.storybook/
+storybook-static/
+
+# Backup and temporary files
+*.bak
+*.tmp
+*.temp
+.backup/
+README_old.md
+
+# Large media files that should be in CDN
+# public/videos/
+# public/large-images/
+
+# Environment variable templates (use Vercel dashboard instead)
+.env.example
+.env.template

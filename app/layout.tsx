@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { NavigationGuard } from "@/components/navigation-guard"
 import "./globals.css"
+import { AuthProvider } from "@/components/auth/auth-provider"
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -38,8 +39,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        <NavigationGuard />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   )
