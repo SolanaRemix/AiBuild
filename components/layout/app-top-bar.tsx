@@ -1,20 +1,9 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
+import { usePathname } from "next/navigation"
 import { GlowButton } from "@/components/aura"
-import { Menu, PanelLeftClose, Bell, Search } from "lucide-react"
+import { Menu, PanelLeftClose, Bell, Search, Zap } from "lucide-react"
 import Link from "next/link"
-
-function usePathnameStable() {
-  return useSyncExternalStore(
-    (cb) => {
-      window.addEventListener("popstate", cb)
-      return () => window.removeEventListener("popstate", cb)
-    },
-    () => window.location.pathname,
-    () => "/"
-  )
-}
 
 interface AppTopBarProps {
   onToggleSidebar: () => void
@@ -33,19 +22,21 @@ const contextTitles: Record<string, string> = {
   "/dev/logs": "Logs",
   "/dev/sdk": "SDK & API",
   "/dev/webhooks": "Webhooks",
-  "/admin": "Admin / Users",
+  "/dev/status": "System Status",
+  "/admin/users": "Admin / Users",
   "/admin/models": "Admin / Models",
   "/admin/agents": "Admin / Agents",
-  "/admin/plans": "Admin / Plans & Billing",
+  "/admin/plans": "Admin / Plans",
+  "/admin/plugins": "Admin / Plugins",
+  "/admin/affiliate": "Admin / Affiliate",
+  "/admin/quests": "Admin / Quests",
   "/admin/system": "Admin / System",
+  "/admin/flags": "Admin / Flags",
 }
 
 function getContextTitle(pathname: string): string {
-  // Exact match first
   if (contextTitles[pathname]) return contextTitles[pathname]
-  // Project workspace
   if (pathname.startsWith("/projects/")) return "Workspace"
-  // Prefix match
   for (const [key, title] of Object.entries(contextTitles)) {
     if (pathname.startsWith(key + "/")) return title
   }
@@ -53,22 +44,30 @@ function getContextTitle(pathname: string): string {
 }
 
 export function AppTopBar({ onToggleSidebar, onToggleMobile }: AppTopBarProps) {
-  const pathname = usePathnameStable()
+  const pathname = usePathname()
   const title = getContextTitle(pathname)
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-background/80 glass px-4 lg:px-6">
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-background/80 backdrop-blur-md px-4 lg:px-5">
       <div className="flex items-center gap-3">
-        {/* Mobile menu */}
-        <button
-          className="flex md:hidden items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          onClick={onToggleMobile}
-          aria-label="Open menu"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
+        {/* Mobile: logo + menu */}
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            className="flex items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            onClick={onToggleMobile}
+            aria-label="Open menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <Link href="/" className="flex items-center gap-1.5">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
+              <Zap className="h-3.5 w-3.5 text-primary-foreground" />
+            </div>
+            <span className="text-sm font-bold text-foreground">AiBuild</span>
+          </Link>
+        </div>
 
-        {/* Desktop sidebar toggle */}
+        {/* Desktop: sidebar toggle + breadcrumb */}
         <button
           className="hidden md:flex items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           onClick={onToggleSidebar}
@@ -77,21 +76,25 @@ export function AppTopBar({ onToggleSidebar, onToggleMobile }: AppTopBarProps) {
           <PanelLeftClose className="h-4 w-4" />
         </button>
 
-        <h1 className="text-sm font-semibold text-foreground">{title}</h1>
+        <div className="hidden md:flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">/</span>
+          <h1 className="text-sm font-semibold text-foreground">{title}</h1>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <button className="flex items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
           <Search className="h-4 w-4" />
           <span className="sr-only">Search</span>
         </button>
-        <button className="flex items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+        <button className="relative flex items-center justify-center rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
           <Bell className="h-4 w-4" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary" />
           <span className="sr-only">Notifications</span>
         </button>
         <Link href="/">
-          <GlowButton variant="ghost" size="sm">
-            Home
+          <GlowButton variant="ghost" size="sm" className="hidden sm:inline-flex">
+            ← Home
           </GlowButton>
         </Link>
       </div>

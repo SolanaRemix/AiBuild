@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { NavigationGuard } from "@/components/navigation-guard"
 import "./globals.css"
-import { AuthProvider } from "@/components/auth/auth-provider"
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -16,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "AiBuild - AI-Powered Code Builder",
+    default: "AiBuild — AI-Powered Code Builder",
     template: "%s | AiBuild",
   },
   description:
@@ -27,6 +26,7 @@ export const viewport: Viewport = {
   themeColor: "#050509",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
@@ -35,11 +35,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark bg-background">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <AuthProvider>{children}</AuthProvider>
+        <NavigationGuard />
+        {children}
       </body>
     </html>
   )

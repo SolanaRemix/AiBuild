@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-import { useSyncExternalStore } from "react"
+import { usePathname } from "next/navigation"
 import type { LucideIcon } from "lucide-react"
 
 export interface SidebarSection {
@@ -22,31 +22,20 @@ interface GlowSidebarProps {
   className?: string
 }
 
-function usePathnameStable() {
-  return useSyncExternalStore(
-    (cb) => {
-      window.addEventListener("popstate", cb)
-      return () => window.removeEventListener("popstate", cb)
-    },
-    () => window.location.pathname,
-    () => "/"
-  )
-}
-
 export function GlowSidebar({ sections, className }: GlowSidebarProps) {
-  const pathname = usePathnameStable()
+  const pathname = usePathname()
 
   return (
     <aside
       className={cn(
-        "flex flex-col w-60 shrink-0 border-r border-border bg-fx-rail glass overflow-auto",
+        "flex flex-col w-60 shrink-0 border-r border-border bg-card/60 backdrop-blur-md overflow-auto",
         className
       )}
     >
-      <nav className="flex flex-col gap-6 px-3 py-4" aria-label="Sidebar navigation">
+      <nav className="flex flex-col gap-5 px-3 py-4" aria-label="Sidebar navigation">
         {sections.map((section) => (
-          <div key={section.title} className="flex flex-col gap-1">
-            <span className="px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">
+          <div key={section.title} className="flex flex-col gap-0.5">
+            <span className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">
               {section.title}
             </span>
             {section.items.map((item) => {
@@ -59,13 +48,13 @@ export function GlowSidebar({ sections, className }: GlowSidebarProps) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+                    "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150",
                     isActive
-                      ? "bg-primary/10 text-primary glow-blue"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                   )}
                 >
-                  <Icon className="h-4 w-4 shrink-0" />
+                  <Icon className={cn("h-4 w-4 shrink-0", isActive && "text-primary")} />
                   <span className="truncate">{item.label}</span>
                   {item.badge && (
                     <span className="ml-auto rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-medium text-primary">

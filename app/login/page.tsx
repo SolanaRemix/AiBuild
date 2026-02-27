@@ -1,43 +1,18 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
-import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { GlowButton, GlowInput, GlowShell, GlowCard } from "@/components/aura"
-import { Zap, Lock, AlertCircle, Loader2 } from "lucide-react"
+import { Zap, Lock } from "lucide-react"
+import { useState } from "react"
 
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setError("")
-    setLoading(true)
-
-    try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        setError("Invalid email or password")
-        setLoading(false)
-        return
-      }
-
-      // Redirect based on role will be handled by middleware
-      router.push("/dashboard")
-      router.refresh()
-    } catch (err) {
-      setError("An error occurred. Please try again.")
-      setLoading(false)
-    }
+    router.push("/dashboard")
   }
 
   return (
@@ -59,28 +34,18 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <GlowCard variant="cyan" hover={false} className="p-8">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5" data-testid="login-form">
-              {error && (
-                <div className="flex items-center gap-2 rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-                  <AlertCircle className="h-4 w-4 shrink-0" />
-                  {error}
-                </div>
-              )}
-
+          <GlowCard variant="cyan" className="p-8">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <GlowInput
                 id="email"
                 label="Email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="admin@aibuild.dev"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 required
-                disabled={loading}
-                data-testid="email-input"
               />
-
               <GlowInput
                 id="password"
                 label="Password"
@@ -90,36 +55,17 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
                 required
-                disabled={loading}
-                data-testid="password-input"
               />
-
-              <GlowButton 
-                type="submit" 
-                disabled={loading} 
-                className="mt-2 w-full"
-                data-testid="signin-button"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
-                  </>
-                ) : (
-                  <>
-                    <Lock className="mr-2 h-4 w-4" />
-                    Sign In
-                  </>
-                )}
+              <GlowButton type="submit" className="mt-2 w-full">
+                <Lock className="mr-2 h-4 w-4" />
+                Sign In
               </GlowButton>
             </form>
           </GlowCard>
 
-          <div className="mt-6 space-y-2 text-center text-xs text-muted-foreground">
-            <p>Demo credentials:</p>
-            <p>Admin: admin@admin.com / Admin123$</p>
-            <p>User: user@aibuild.com / Admin123$</p>
-            <p>Dev: dev@aibuild.com / Admin123$</p>
+          <div className="mt-6 space-y-1 text-center text-xs text-muted-foreground">
+            <p className="font-medium">Demo — no password required</p>
+            <p>admin@aibuild.dev / user@aibuild.dev / dev@aibuild.dev</p>
           </div>
         </div>
       </div>
