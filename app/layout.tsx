@@ -14,17 +14,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "AiBuild - AI-Powered Code Builder",
-    template: "%s | AiBuild",
+    default: "AiOS — Operator-Grade AI Operating System",
+    template: "%s | AiOS",
   },
   description:
-    "Multi-model AI code builder. Prompt to project to deploy. Web, mobile, and desktop targets powered by CyberAi.",
+    "AiOS: a kernel-driven AI operating system with agent runtime, tool registry, memory layer, event bus, and full system observability.",
 }
 
 export const viewport: Viewport = {
   themeColor: "#050509",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

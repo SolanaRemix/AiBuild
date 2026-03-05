@@ -1,6 +1,4 @@
 import { eventBus } from "@/core/events"
-import { LogLevelBadge } from "@/components/ui/status-badge"
-import { formatRelativeTime } from "@/lib/utils"
 import { LogsClient } from "@/components/logs/logs-client"
 
 export default function LogsPage() {
