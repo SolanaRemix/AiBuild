@@ -2,125 +2,212 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 222 80% 4%;
-    --foreground: 210 20% 95%;
-    --card: 222 47% 6%;
-    --card-foreground: 210 20% 95%;
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 20% 95%;
-    --primary: 199 89% 60%;
-    --primary-foreground: 222 80% 4%;
-    --secondary: 271 81% 65%;
-    --secondary-foreground: 210 20% 95%;
-    --muted: 217 33% 12%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 142 71% 45%;
-    --accent-foreground: 222 80% 4%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 95%;
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 199 89% 60%;
-    --radius: 0.75rem;
-    --success: 142 71% 45%;
-    --success-foreground: 222 80% 4%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 222 80% 4%;
+/* ─────────────────────────────────────────────────────────
+   AiOS Design System — GitHub Blue Digital
+   Dark mode  : [data-theme="dark"]  (default)
+   Light mode : [data-theme="light"]
+   ───────────────────────────────────────────────────────── */
 
-    /* Aura FX tokens */
-    --fx-glow-blue: 199 89% 60%;
-    --fx-glow-green: 142 71% 45%;
-    --fx-glow-purple: 271 81% 65%;
-    --fx-surface: 222 47% 6%;
-    --fx-surface-elevated: 222 40% 9%;
-    --fx-rail: 222 47% 5%;
+@layer base {
+
+  /* ── DARK (default) ── */
+  :root,
+  [data-theme="dark"] {
+    /* Backgrounds */
+    --background:         220 13% 7%;    /* #0d1117 GitHub dark canvas */
+    --card:               220 14% 9%;    /* #161b22 GitHub dark surface */
+    --popover:            220 14% 9%;
+    --muted:              213 17% 14%;   /* #21262d */
+
+    /* Foregrounds */
+    --foreground:         210 17% 90%;   /* #e6edf3 GitHub light text */
+    --card-foreground:    210 17% 90%;
+    --popover-foreground: 210 17% 90%;
+    --muted-foreground:   215 14% 55%;   /* #8b949e */
+
+    /* Brand – sky/electric blue */
+    --primary:            199 89% 60%;   /* #38bdf8 sky-400 */
+    --primary-foreground: 220 13% 7%;
+
+    /* Secondary – steel blue (replaces purple) */
+    --secondary:          211 57% 42%;   /* #2f81f7 → muted GitHub link blue */
+    --secondary-foreground: 210 17% 90%;
+
+    /* Accent – emerald for success/running */
+    --accent:             137 55% 47%;   /* #3fb950 GitHub green */
+    --accent-foreground:  220 13% 7%;
+
+    /* Semantic */
+    --destructive:        0 72% 51%;     /* #f85149 */
+    --destructive-foreground: 210 17% 90%;
+    --success:            137 55% 47%;
+    --success-foreground: 220 13% 7%;
+    --warning:            36 77% 49%;    /* #d29922 */
+    --warning-foreground: 220 13% 7%;
+
+    /* Chrome */
+    --border:             215 19% 22%;   /* #30363d */
+    --input:              215 19% 22%;
+    --ring:               199 89% 60%;
+    --radius:             0.625rem;
+
+    /* AiOS FX tokens */
+    --fx-glow-blue:       199 89% 60%;
+    --fx-glow-green:      137 55% 47%;
+    --fx-glow-amber:      36  77% 49%;
+    --fx-surface:         220 14% 9%;
+    --fx-surface-elevated:220 14% 12%;
+    --fx-rail:            220 13% 6%;
+    --fx-grid-line:       rgba(48, 54, 61, 0.6);
   }
+
+  /* ── LIGHT ── */
+  [data-theme="light"] {
+    /* Backgrounds */
+    --background:         0 0% 100%;     /* #ffffff */
+    --card:               210 17% 97%;   /* #f6f8fa */
+    --popover:            0 0% 100%;
+    --muted:              210 17% 93%;   /* #eaeef2 */
+
+    /* Foregrounds */
+    --foreground:         220 13% 13%;   /* #1f2328 */
+    --card-foreground:    220 13% 13%;
+    --popover-foreground: 220 13% 13%;
+    --muted-foreground:   215 14% 40%;   /* #636c76 */
+
+    /* Brand – GitHub blue */
+    --primary:            213 81% 45%;   /* #0969da */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary – soft blue */
+    --secondary:          211 100% 95%;  /* #dbeafe light blue surface */
+    --secondary-foreground: 213 81% 32%;
+
+    /* Accent – GitHub green */
+    --accent:             133 62% 30%;   /* #1a7f37 */
+    --accent-foreground:  0 0% 100%;
+
+    /* Semantic */
+    --destructive:        0 80% 45%;     /* #cf222e */
+    --destructive-foreground: 0 0% 100%;
+    --success:            133 62% 30%;
+    --success-foreground: 0 0% 100%;
+    --warning:            38 89% 36%;    /* #9a6700 */
+    --warning-foreground: 0 0% 100%;
+
+    /* Chrome */
+    --border:             214 13% 82%;   /* #d0d7de */
+    --input:              214 13% 82%;
+    --ring:               213 81% 45%;
+
+    /* AiOS FX tokens */
+    --fx-glow-blue:       213 81% 45%;
+    --fx-glow-green:      133 62% 30%;
+    --fx-glow-amber:      38  89% 36%;
+    --fx-surface:         210 17% 97%;
+    --fx-surface-elevated:0 0% 100%;
+    --fx-rail:            210 17% 94%;
+    --fx-grid-line:       rgba(208, 215, 222, 0.7);
+  }
+
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+  html {
+    @apply bg-background;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100dvh;
+  }
+  /* Monospace for code/terminal contexts */
+  code, pre, kbd, samp {
+    @apply font-mono;
   }
 }
 
+/* ─────────────────────────────────────────────────────────
+   Utility classes
+   ───────────────────────────────────────────────────────── */
+
 @layer utilities {
+
+  /* ── Glow shadows — adapt per theme ── */
   .glow-blue {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15),
-                0 0 60px rgba(56, 189, 248, 0.05);
-  }
-  .glow-green {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15),
-                0 0 60px rgba(34, 197, 94, 0.05);
-  }
-  .glow-purple {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.15),
-                0 0 60px rgba(168, 85, 247, 0.05);
+    box-shadow: 0 0 18px hsl(var(--fx-glow-blue) / 0.18),
+                0 0 50px hsl(var(--fx-glow-blue) / 0.06);
   }
   .glow-blue-strong {
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.45),
-                0 0 80px rgba(56, 189, 248, 0.15);
+    box-shadow: 0 0 36px hsl(var(--fx-glow-blue) / 0.40),
+                0 0 72px hsl(var(--fx-glow-blue) / 0.12);
+  }
+  /* Legacy cyan aliases */
+  .glow-cyan        { @apply glow-blue; }
+  .glow-cyan-strong { @apply glow-blue-strong; }
+
+  .glow-green {
+    box-shadow: 0 0 18px hsl(var(--fx-glow-green) / 0.18),
+                0 0 50px hsl(var(--fx-glow-green) / 0.06);
   }
   .glow-green-strong {
-    box-shadow: 0 0 40px rgba(34, 197, 94, 0.45),
-                0 0 80px rgba(34, 197, 94, 0.15);
+    box-shadow: 0 0 36px hsl(var(--fx-glow-green) / 0.40),
+                0 0 72px hsl(var(--fx-glow-green) / 0.12);
   }
-  .glow-purple-strong {
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.45),
-                0 0 80px rgba(168, 85, 247, 0.15);
-  }
-  /* Legacy cyan aliases for backward compat */
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15),
-                0 0 60px rgba(56, 189, 248, 0.05);
-  }
-  .glow-cyan-strong {
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.45),
-                0 0 80px rgba(56, 189, 248, 0.15);
-  }
-  .border-glow-cyan {
-    border-color: rgba(56, 189, 248, 0.25);
-  }
-  .border-glow-blue {
-    border-color: rgba(56, 189, 248, 0.25);
-  }
-  .border-glow-green {
-    border-color: rgba(34, 197, 94, 0.25);
-  }
-  .border-glow-purple {
-    border-color: rgba(168, 85, 247, 0.25);
-  }
-  .text-glow-blue {
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-  }
-  .text-glow-green {
-    text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
-  }
-  .text-glow-purple {
-    text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-  }
-  /* Legacy alias */
-  .text-glow-cyan {
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-  }
+
+  /* ── Glow borders ── */
+  .border-glow-blue   { border-color: hsl(var(--fx-glow-blue) / 0.30); }
+  .border-glow-cyan   { border-color: hsl(var(--fx-glow-blue) / 0.30); }
+  .border-glow-green  { border-color: hsl(var(--fx-glow-green) / 0.30); }
+
+  /* ── Glow text ── */
+  .text-glow-blue  { text-shadow: 0 0 18px hsl(var(--fx-glow-blue) / 0.55); }
+  .text-glow-cyan  { text-shadow: 0 0 18px hsl(var(--fx-glow-blue) / 0.55); }
+  .text-glow-green { text-shadow: 0 0 18px hsl(var(--fx-glow-green) / 0.55); }
+
+  /* ── Glass / backdrop ── */
   .glass {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
   }
-  .noise {
-    position: relative;
+
+  /* ── Dot-grid background (subtle, theme-adaptive) ── */
+  .grid-bg {
+    background-image:
+      radial-gradient(circle, var(--fx-grid-line) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
-  .noise::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    border-radius: inherit;
+
+  /* ── Scrollbar (webkit, dark + light) ── */
+  .scrollbar-thin::-webkit-scrollbar        { width: 4px; height: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track  { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb  {
+    background: hsl(var(--border));
+    border-radius: 2px;
   }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* ── Safe-area bottom padding (iOS notch) ── */
+  .pb-safe {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+
+  /* ── Touch targets ── */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* ── Text balance ── */
+  .text-balance  { text-wrap: balance; }
+  .text-pretty   { text-wrap: pretty; }
 }

@@ -5,7 +5,7 @@ import { memoryLayer } from "@/core/memory"
 import { StatCard } from "@/components/ui/stat-card"
 import { SystemMonitorCharts } from "@/components/monitor/monitor-charts"
 import { SyscallTable } from "@/components/monitor/syscall-table"
-import { Cpu, MemoryStick, Activity, Zap, Server, Radio } from "lucide-react"
+import { Cpu, Database, Activity, Zap, Server, Radio } from "lucide-react"
 import { formatUptime } from "@/lib/utils"
 import { cn } from "@/lib/utils"
 
@@ -71,7 +71,7 @@ export default function MonitorPage() {
         <StatCard title="Running" value={agentStats.running} icon={Radio} glow="green" />
         <StatCard title="Tools" value={toolStats.total} icon={Zap} glow="blue" />
         <StatCard title="Tool Calls" value={toolStats.totalCalls.toLocaleString()} icon={Server} glow="amber" />
-        <StatCard title="Memory" value={memStats.total} icon={MemoryStick} glow="blue" />
+        <StatCard title="Memory" value={memStats.total} icon={Database} glow="blue" />
         <StatCard title="Syscalls" value={syscalls.length} icon={Cpu} glow="blue" />
       </div>
 

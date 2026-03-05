@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss"
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: ["selector", '[data-theme="dark"]'],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -56,12 +56,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
         },
-        "fx-blue": "hsl(var(--fx-glow-blue))",
-        "fx-green": "hsl(var(--fx-glow-green))",
-        "fx-purple": "hsl(var(--fx-glow-purple))",
-        "fx-surface": "hsl(var(--fx-surface))",
+        "fx-blue":             "hsl(var(--fx-glow-blue))",
+        "fx-green":            "hsl(var(--fx-glow-green))",
+        "fx-amber":            "hsl(var(--fx-glow-amber))",
+        "fx-surface":          "hsl(var(--fx-surface))",
         "fx-surface-elevated": "hsl(var(--fx-surface-elevated))",
-        "fx-rail": "hsl(var(--fx-rail))",
+        "fx-rail":             "hsl(var(--fx-rail))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -4,16 +4,7 @@ import { agentRegistry } from "@/core/agents/registry"
 import { toolRegistry } from "@/core/tools/registry"
 import { memoryLayer } from "@/core/memory"
 import { eventBus } from "@/core/events"
-import {
-  Bot,
-  Wrench,
-  Brain,
-  Zap,
-  Activity,
-  TrendingUp,
-  Clock,
-  AlertTriangle,
-} from "lucide-react"
+import { Bot, Wrench, Brain, Zap } from "lucide-react"
 import { formatRelativeTime, formatDuration } from "@/lib/utils"
 import { DashboardCharts } from "@/components/dashboard/charts"
 import { RecentEvents } from "@/components/dashboard/recent-events"
