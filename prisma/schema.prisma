@@ -2,7 +2,11 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  // Prisma v7 defaults to the new WASM "client" engine which requires an
+  // adapter or accelerateUrl. Use the traditional binary engine for
+  // standard PostgreSQL connectivity via DATABASE_URL.
+  engineType = "binary"
 }
 
 datasource db {
