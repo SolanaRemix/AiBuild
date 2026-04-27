@@ -26,7 +26,7 @@ const nodeGlobals = {
 export default [
   js.configs.recommended,
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mjs"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
