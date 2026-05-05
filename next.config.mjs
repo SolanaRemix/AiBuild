@@ -20,6 +20,8 @@ const nextConfig = {
           "img-src 'self' data: blob:",
           "font-src 'self'",
           "connect-src 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
           "frame-ancestors 'none'",
         ].join("; "),
       },

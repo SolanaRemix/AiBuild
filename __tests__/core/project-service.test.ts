@@ -72,20 +72,25 @@ describe("ProjectService", () => {
   })
 
   it("lists projects by user", async () => {
+    // Mock Date.now() to return distinct values so IDs never collide regardless of
+    // timer granularity or event-loop scheduling.
+    let tick = 0
+    const dateSpy = jest.spyOn(Date, "now").mockImplementation(() => 1000 + tick++)
+
     await service.createFromPrompt({
       prompt: "Build a test application with a homepage",
       templateType: "app",
       primaryTarget: "web",
       userId: "user_a",
     })
-    // Wait 2ms to ensure Date.now() produces a different value for the project ID
-    await new Promise((r) => setTimeout(r, 2))
     await service.createFromPrompt({
       prompt: "Build another test app",
       templateType: "landing",
       primaryTarget: "web",
       userId: "user_b",
     })
+
+    dateSpy.mockRestore()
 
     const userAProjects = await service.listByUser("user_a")
     expect(userAProjects).toHaveLength(1)
