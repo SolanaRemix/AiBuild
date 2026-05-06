@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=20.9.0",
     "pnpm": ">=9.0.0"
   },
   "scripts": {
@@ -79,7 +79,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^10.0.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22",
     "@types/react": "^19",
