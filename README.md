@@ -119,9 +119,9 @@ pnpm dev
 
 | Role      | Email              | Password   | Access Panel |
 |-----------|-------------------|------------|--------------|
-| Admin     | admin@admin.com   | Admin123$  | `/admin`     |
-| User      | user@aibuild.com  | Admin123$  | `/dashboard` |
-| Developer | dev@aibuild.com   | Admin123$  | `/dev`       |
+| Admin     | admin@admin.com   | Admin123  | `/admin`     |
+| User      | user@aibuild.com  | Admin123  | `/dashboard` |
+| Developer | dev@aibuild.com   | Admin123  | `/dev`       |
 
 ---
 
