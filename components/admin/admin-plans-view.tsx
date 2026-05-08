@@ -10,7 +10,7 @@ import {
   Users,
   Zap,
   Crown,
-  Infinity,
+  Infinity as InfinityIcon,
 } from "lucide-react"
 
 interface PlanConfig {
@@ -122,7 +122,7 @@ const planIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   free: Zap,
   pro: Crown,
   team: Users,
-  enterprise: Infinity,
+  enterprise: InfinityIcon,
 }
 
 export function AdminPlansView() {

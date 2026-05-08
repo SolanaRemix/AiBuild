@@ -12,6 +12,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
     "verify:env": "tsx scripts/verify-env.ts",
     "verify:env:template": "tsx scripts/verify-env.ts --template",
     "prepare:vercel": "tsx scripts/prepare-vercel.ts",
@@ -79,7 +81,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.7.0",
     "@types/bcryptjs": "^2.4.6",
+    "@types/jest": "29.5.12",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -87,9 +91,11 @@
     "@typescript-eslint/parser": "^8.55.0",
     "eslint": "^9.7.0",
     "eslint-config-next": "^16.1.6",
+    "jest": "29.7.0",
     "postcss": "^8.5",
     "prisma": "^7.3.0",
     "tailwindcss": "^3.4.17",
+    "ts-jest": "29.2.5",
     "tsx": "^4.21.0",
     "typescript": "5.7.3"
   }
