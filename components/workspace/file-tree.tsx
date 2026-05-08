@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import type { ProjectFile } from "@/lib/types"
 import { FileCode2, FileJson, FileText, ChevronRight, Folder } from "lucide-react"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 
 interface FileTreeProps {
   files: ProjectFile[]
@@ -65,7 +65,6 @@ function TreeItem({
   onSelect: (path: string) => void
 }) {
   const [expanded, setExpanded] = useState(true)
-  const Icon = node.isDir ? Folder : getFileIcon(node.path)
   const isSelected = node.path === selectedPath
 
   return (
@@ -94,7 +93,15 @@ function TreeItem({
             )}
           />
         )}
-        <Icon className="h-3.5 w-3.5 shrink-0" />
+        {node.isDir ? (
+          <Folder className="h-3.5 w-3.5 shrink-0" />
+        ) : node.path.endsWith(".tsx") || node.path.endsWith(".ts") ? (
+          <FileCode2 className="h-3.5 w-3.5 shrink-0" />
+        ) : node.path.endsWith(".json") ? (
+          <FileJson className="h-3.5 w-3.5 shrink-0" />
+        ) : (
+          <FileText className="h-3.5 w-3.5 shrink-0" />
+        )}
         <span className="truncate font-mono text-xs">{node.name}</span>
       </button>
       {node.isDir && expanded && (

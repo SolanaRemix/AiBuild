@@ -45,7 +45,9 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    checkSession()
+    // checkSession calls setState only after await; safe to call here without await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void checkSession()
   }, [checkSession])
 
   const login = async (username: string, password: string) => {
