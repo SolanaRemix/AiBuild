@@ -1,0 +1,57 @@
+name: Deploy
+
+# Triggered automatically once the CI workflow completes.
+# Two jobs cover the full deployment lifecycle:
+#   • deploy-preview  — Vercel preview URL for every pull-request
+#   • deploy-production — production deployment (requires manual approval via
+#                         the "production" GitHub Environment)
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+# Minimal permissions for the outer workflow; _deploy-core.yml declares its
+# own actions:read + deployments:write per-job.
+permissions:
+  contents: read
+  deployments: write
+  actions: read
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────────
+  # Preview deployment — runs for every PR that passes CI.
+  # Creates a Vercel preview URL; no database migrations are applied.
+  # ──────────────────────────────────────────────────────────────────────────
+  deploy-preview:
+    name: Preview
+    # Only deploy previews for pull-request builds that passed CI.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    uses: ./.github/workflows/_deploy-core.yml
+    with:
+      environment: staging
+      ci-run-id: ${{ github.event.workflow_run.id }}
+      vercel-prod: false
+    secrets: inherit
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Production deployment — runs only for pushes (or version tags) to main
+  # that passed CI. Requires manual approval via the "production" GitHub
+  # Environment (Settings → Environments → production → Required reviewers).
+  # ──────────────────────────────────────────────────────────────────────────
+  deploy-production:
+    name: Production
+    # Guard: must be a push event (merged PR or direct push / tag) on main.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      (github.event.workflow_run.head_branch == 'main' ||
+       startsWith(github.event.workflow_run.head_branch, 'v'))
+    uses: ./.github/workflows/_deploy-core.yml
+    with:
+      environment: production
+      ci-run-id: ${{ github.event.workflow_run.id }}
+      vercel-prod: true
+    secrets: inherit

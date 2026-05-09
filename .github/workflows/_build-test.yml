@@ -1,0 +1,171 @@
+name: Build & Test (reusable)
+# Called by ci.yml. Runs lint, typecheck, and build in parallel,
+# then uploads the .next build artifact for the deploy pipeline.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version to use
+        type: string
+        default: '20'
+    secrets:
+      DATABASE_URL:
+        required: false
+      NEXTAUTH_SECRET:
+        required: false
+      NEXTAUTH_URL:
+        required: false
+
+permissions:
+  contents: read
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Common setup used by every job (DRY via YAML anchors)
+# ──────────────────────────────────────────────────────────────────────────────
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        env:
+          NODE_ENV: development
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
+
+      - name: Lint
+        run: pnpm run lint
+
+  # ────────────────────────────────────────────────────────────────────────────
+  typecheck:
+    name: Type-check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        env:
+          NODE_ENV: development
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
+
+      - name: Type-check
+        run: pnpm run typecheck
+
+  # ────────────────────────────────────────────────────────────────────────────
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    # Placeholder env values keep the build green on fork PRs where secrets
+    # are unavailable; production builds use the real secret values.
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://dummy:dummy@localhost:5432/dummy' }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'ci-build-secret-not-for-production' }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL || 'http://localhost:3000' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        env:
+          NODE_ENV: development
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
+
+      # Persist the Next.js compiler cache across runs for faster rebuilds.
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          # Scope the source hash to known source dirs to avoid scanning
+          # node_modules and other large trees on every run.
+          key: nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('app/**', 'components/**', 'lib/**', 'core/**', 'types/**') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+            nextjs-${{ runner.os }}-
+
+      - name: Build
+        run: pnpm run build
+
+      # The artifact is consumed by the deploy pipeline to avoid a second build.
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build
+          path: .next/
+          retention-days: 7
+          if-no-files-found: error
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # Solana / Rust toolchain (uncomment when programs/ directory is added)
+  # ────────────────────────────────────────────────────────────────────────────
+  # solana-build:
+  #   name: Solana Programs
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Cache Rust toolchain
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: |
+  #           ~/.rustup
+  #           ~/.cargo/registry
+  #           ~/.cargo/git
+  #           target
+  #         key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+  #         restore-keys: rust-${{ runner.os }}-
+  #     - name: Install Rust (stable)
+  #       uses: dtolnay/rust-toolchain@stable
+  #     - name: Install Solana CLI
+  #       run: |
+  #         sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+  #         echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+  #     - name: Install Anchor CLI
+  #       run: cargo install --git https://github.com/coral-xyz/anchor avm --locked
+  #     - name: Build programs
+  #       run: anchor build
+  #     - name: Test programs
+  #       run: anchor test

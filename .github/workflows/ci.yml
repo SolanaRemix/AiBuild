@@ -1,0 +1,27 @@
+name: CI
+
+# Runs on every pull-request and on pushes to main (including version tags).
+# Delegates all work to the reusable _build-test.yml workflow so that the
+# same checks can be reused from other callers without duplication.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*.*.*']    # semantic-version tags trigger CI (and then deploy.yml)
+  pull_request:
+    branches: [main]
+
+# Default to the least-privilege token; jobs that need extra permissions
+# declare them explicitly.
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    uses: ./.github/workflows/_build-test.yml
+    with:
+      node-version: '20'
+    # Propagate all repository secrets so _build-test.yml jobs can fall back
+    # to placeholder values when secrets are absent (e.g., fork PRs).
+    secrets: inherit

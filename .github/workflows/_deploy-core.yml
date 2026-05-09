@@ -1,0 +1,100 @@
+name: Deploy Core (reusable)
+# Called by deploy.yml for both preview (staging) and production deployments.
+# Downloads the build artifact produced by the CI pipeline, runs Prisma
+# migrations on production, then deploys to Vercel.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Target GitHub Environment: staging | production'
+        type: string
+        required: true
+      ci-run-id:
+        description: 'CI workflow run ID used to retrieve the build artifact'
+        type: string
+        required: true
+      vercel-prod:
+        description: 'Pass --prod flag to Vercel (true for production)'
+        type: boolean
+        default: false
+    secrets:
+      VERCEL_TOKEN:
+        required: true
+      VERCEL_ORG_ID:
+        required: true
+      VERCEL_PROJECT_ID:
+        required: true
+      DATABASE_URL:
+        required: false
+      NEXTAUTH_SECRET:
+        required: false
+      NEXTAUTH_URL:
+        required: false
+
+permissions:
+  contents: read
+  deployments: write
+  actions: read    # required to download artifacts from a different workflow run
+
+jobs:
+  deploy:
+    name: Deploy (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    # Production environment requires manual approval via GitHub Environments.
+    # Configure required reviewers at Settings → Environments → production.
+    environment: ${{ inputs.environment }}
+    permissions:
+      contents: read
+      deployments: write
+      actions: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Download the .next artifact produced by the build job in ci.yml.
+      # .next is git-ignored so checkout never creates it; the download is
+      # safe and provides the complete build output for deployment.
+      # actions/download-artifact@v4 cross-workflow download requires actions:read.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build
+          path: .next/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.ci-run-id }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        env:
+          NODE_ENV: development
+        run: pnpm install --no-frozen-lockfile
+
+      # Only run schema migrations against the live database on production
+      # deployments; preview environments use the same database only if
+      # DATABASE_URL points to a separate staging database.
+      - name: Run Prisma migrations
+        if: ${{ inputs.environment == 'production' }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm exec prisma migrate deploy
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          prod: ${{ inputs.vercel-prod }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
